@@ -11,10 +11,6 @@ public class Program {
         g.addEdgeWithSource("x2","x2",1,"u4");
         System.out.println(g.toString());
 
-        g.listEnteringEdge("x2");
-        g.removeEdgeWithSource("x2","x2","u4");
-        g.listEnteringEdge("x2");
-
         g.removeNode("x2");
         System.out.println(g.toString());
     }
