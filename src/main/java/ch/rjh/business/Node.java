@@ -9,10 +9,12 @@ public class Node {
     private String name;
     private Map<String, Edge> enteringEdge;
     private Map<String, Edge> exitingEdge;
+    private boolean isMarked;
 
     // Constructors :
     public Node(String name) {
         this.name = name;
+        this.isMarked = false;
         enteringEdge = new HashMap<>();
         exitingEdge = new HashMap<>();
     }
@@ -34,6 +36,14 @@ public class Node {
         this.enteringEdge = enteringEdge;
     }
 
+    public boolean isMarked() {
+        return isMarked;
+    }
+
+    public void setMarked(boolean marked) {
+        isMarked = marked;
+    }
+
     public Map<String, Edge> getExitingEdge() {
         return exitingEdge;
     }
@@ -43,6 +53,9 @@ public class Node {
     }
 
     // Methods :
+    public void mark() {
+        this.setMarked(true);
+    }
 
     // toString :
     @Override

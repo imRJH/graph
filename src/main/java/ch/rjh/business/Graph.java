@@ -129,6 +129,46 @@ public class Graph {
         findNode(nodeDestination).getEnteringEdge().remove(edgeName);
     }
 
+    public List<String> parcoursLargeur(String departNodeNameLargeur) {
+        LinkedList<Node> queue = new LinkedList<>(); // Création de la queue > FIFO
+        List<String> nodesNameLongueur = new ArrayList<>(); // Création de la liste qu'on va retourner, contenant les noms des noeuds parcourus
+        Node firstNodeLargeur = findNode(departNodeNameLargeur); // Création du premier objet Node
+        queue.addLast(firstNodeLargeur); // Ajout du premier Node à la queue
+        firstNodeLargeur.mark(); // Premier Node marqué
+        while (!queue.isEmpty()) {
+            Node currentLargeur = queue.removeFirst(); // Enlève le premier de la queue
+            nodesNameLongueur.add(currentLargeur.getName()); // Ajout du nom à la liste qu'on va retourner
+            for (Edge edge : currentLargeur.getExitingEdge().values()) { // // Parcours de tous les noms sortant du Node courant
+                Node destinationNode = edge.getDestination();
+                if (!destinationNode.isMarked()) {
+                    queue.addLast(destinationNode);
+                    destinationNode.mark();
+                }
+            }
+        }
+        return nodesNameLongueur;
+    }
+
+    public List<String> parcoursLongueur(String departNodeNameLongueur) {
+        LinkedList<Node> stack = new LinkedList<>();
+        List<String> nodesNameLongueur = new ArrayList<>(); // Création de la liste qu'on va retourner, contenant les noms des noeuds parcourus
+        Node firstNodeLongueur = findNode(departNodeNameLongueur); // Création du premier objet Node
+        stack.addFirst(firstNodeLongueur); // Ajout du premier Node à la pile
+        firstNodeLongueur.mark(); // Premier Node marqué
+        while (!stack.isEmpty()) {
+            Node currentLongueur = stack.removeFirst(); // Enlève le dernier de la pile > LIFO
+            nodesNameLongueur.add(currentLongueur.getName()); // Ajout du nom à la liste qu'on va retourner
+            for (Edge edge : currentLongueur.getExitingEdge().values()) { // // Parcours de tous les noms sortant du Node courant
+                Node destinationNode = edge.getDestination();
+                if (!destinationNode.isMarked()) {
+                    stack.addFirst(destinationNode);
+                    destinationNode.mark();
+                }
+            }
+        }
+        return nodesNameLongueur;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
