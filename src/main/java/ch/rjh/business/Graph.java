@@ -65,7 +65,7 @@ public class Graph {
             Iterator<Edge> iteEdge = node.getExitingEdge().values().iterator();
             while (iteEdge.hasNext()) {
                 Edge edge = iteEdge.next();
-                if (nodeName == edge.getDestination().getName()) {
+                if (nodeName.equals(edge.getDestination().getName())) {
                     iteEdge.remove();
                 }
             }
@@ -74,6 +74,22 @@ public class Graph {
     }
 
     public void removeNodeWithSource(String nodeName) {
+        for (Node node : this.nodeMap.values()) {
+            Iterator<Edge> exitingEdge = node.getExitingEdge().values().iterator();
+            while (exitingEdge.hasNext()) {
+                Edge edge = exitingEdge.next();
+                if (nodeName.equals(edge.getDestination().getName())) {
+                    exitingEdge.remove();
+                }
+            }
+            Iterator<Edge> enteringEdge = node.getEnteringEdge().values().iterator();
+            while (enteringEdge.hasNext()) {
+                Edge edge = enteringEdge.next();
+                if (nodeName.equals(edge.getSource().getName())) {
+                    enteringEdge.remove();
+                }
+            }
+        }
         nodeMap.remove(nodeName);
     }
 

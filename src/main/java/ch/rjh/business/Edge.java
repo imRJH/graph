@@ -48,6 +48,14 @@ public class Edge {
         return destination;
     }
 
+    public Node getSource() {
+        return source;
+    }
+
+    public void setSource(Node source) {
+        this.source = source;
+    }
+
     public void setDestination(Node destination) {
         this.destination = destination;
     }
