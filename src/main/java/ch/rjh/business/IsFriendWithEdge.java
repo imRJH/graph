@@ -6,6 +6,10 @@ public class IsFriendWithEdge extends Edge {
         super(name, destination);
     }
 
+    public IsFriendWithEdge(String name, Node source, Node destination) {
+        super(name, source, destination);
+    }
+
     public IsFriendWithEdge(String name, double metric, Node destination) {
         super(name, metric, destination);
     }

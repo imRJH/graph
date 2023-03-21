@@ -1,6 +1,6 @@
 package ch.rjh.business;
 
-public class PersonNode extends Node{
+public class PersonNode extends Node {
 
     private String ville;
     private String name;
@@ -11,7 +11,7 @@ public class PersonNode extends Node{
     }
 
     public void addFriend(String edgeName, PersonNode friend) {
-        Edge edge = new IsFriendWithEdge(edgeName, Graph.findNode(friend.getName()));
+        Edge edge = new IsFriendWithEdge(edgeName, Graph.findNode(this.getName()), Graph.findNode(friend.getName()));
         Graph.findNode(friend.getName()).getEnteringEdge().put(edgeName, edge);
         Graph.findNode(this.getName()).getExitingEdge().put(edgeName, edge);
     }

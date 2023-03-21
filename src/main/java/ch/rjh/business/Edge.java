@@ -20,6 +20,13 @@ public class Edge {
         this.destination = destination;
     }
 
+    public Edge(String name, Node source, Node destination) {
+        this.name = name;
+        this.metric = metric;
+        this.source = source;
+        this.destination = destination;
+    }
+
     public Edge(String name, double metric, Node source, Node destination) {
         this.name = name;
         this.metric = metric;

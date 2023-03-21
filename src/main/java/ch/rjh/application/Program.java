@@ -51,7 +51,7 @@ public class Program {
         System.out.println(graphe.toString());
 
         // Parcours du graphe en largeur avec un niveau :
-        graphe.widthWay(jean.getName(), IsFriendWithEdge.class,1);
+        graphe.widthWay(julie.getName(), IsFriendWithEdge.class,1);
         graphe.widthWay(julie.getName(), IsListeningEdge.class,1);
 
     }
