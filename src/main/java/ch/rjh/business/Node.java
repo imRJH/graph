@@ -7,6 +7,7 @@ public class Node {
 
     // Attributes :
     private String name;
+    private int level;
     private Map<String, Edge> enteringEdge;
     private Map<String, Edge> exitingEdge;
     private boolean isMarked;
@@ -14,6 +15,7 @@ public class Node {
     // Constructors :
     public Node(String name) {
         this.name = name;
+        this.level = 0;
         this.isMarked = false;
         enteringEdge = new HashMap<>();
         exitingEdge = new HashMap<>();
@@ -26,6 +28,14 @@ public class Node {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
     }
 
     public Map<String, Edge> getEnteringEdge() {
@@ -42,6 +52,11 @@ public class Node {
 
     public void setMarked(boolean marked) {
         isMarked = marked;
+    }
+
+    public void reinit() {
+        this.level = 0;
+        this.isMarked = false;
     }
 
     public Map<String, Edge> getExitingEdge() {

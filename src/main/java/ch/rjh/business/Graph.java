@@ -1,12 +1,13 @@
 package ch.rjh.business;
 
 import java.util.*;
+import java.util.Scanner;
 
 public class Graph {
 
     // Attributes :
     private String name;
-    private Map<String, Node> nodeMap;
+    private static Map<String, Node> nodeMap;
 
     // Constructors :
     public Graph(String name) {
@@ -32,13 +33,17 @@ public class Graph {
     }
 
     // Methods :
-    public Node findNode(String nodeName) {
-        if (nodeName.contains(nodeName)) {
+    public static Node findNode(String nodeName) {
+        if (nodeMap.containsKey(nodeName)) {
             return nodeMap.get(nodeName);
         }
         else {
             return null;
         }
+    }
+
+    public void addNode(Node node) {
+        this.nodeMap.put(node.getName(), node);
     }
 
     public Edge findEdge(String nodeName, String edgeName) {
@@ -94,26 +99,26 @@ public class Graph {
     }
 
     public void addEdge(String nodeSource, String nodeDestination, double metric, String edgeName) {
-        if (findNode(nodeSource) == null ) {
+        if(null == findNode(nodeSource)) {
             Node node = new Node(nodeSource);
-            nodeMap.put(node.getName(), node);
+            nodeMap.put(nodeSource, node);
         }
-        if (findNode(nodeDestination) == null) {
+        if(findNode(nodeDestination) == null){
             Node node = new Node(nodeDestination);
-            nodeMap.put(node.getName(), node);
+            nodeMap.put(nodeDestination, node);
         }
         Edge edge = new Edge(edgeName, metric, findNode(nodeDestination));
         findNode(nodeSource).getExitingEdge().put(edge.getName(), edge);
     }
 
     public void addEdgeWithSource(String nodeSource, String nodeDestination, double metric, String edgeName) {
-        if (findNode(nodeSource) == null ) {
+        if(null == findNode(nodeSource)) {
             Node node = new Node(nodeSource);
-            nodeMap.put(node.getName(), node);
+            nodeMap.put(nodeSource, node);
         }
-        if (findNode(nodeDestination) == null) {
+        if(null == findNode(nodeDestination)){
             Node node = new Node(nodeDestination);
-            nodeMap.put(node.getName(), node);
+            nodeMap.put(nodeDestination, node);
         }
         Edge edge = new Edge(edgeName, metric, findNode(nodeSource), findNode(nodeDestination));
         findNode(nodeSource).getExitingEdge().put(edge.getName(), edge);
@@ -129,16 +134,17 @@ public class Graph {
         findNode(nodeDestination).getEnteringEdge().remove(edgeName);
     }
 
-    public List<String> parcoursLargeur(String departNodeNameLargeur) {
+    public void widthWay(String departNodeNameWidth) {
+        reinitAll();
         LinkedList<Node> queue = new LinkedList<>(); // Création de la queue > FIFO
-        List<String> nodesNameLongueur = new ArrayList<>(); // Création de la liste qu'on va retourner, contenant les noms des noeuds parcourus
-        Node firstNodeLargeur = findNode(departNodeNameLargeur); // Création du premier objet Node
+        List<String> nodesNameLargeur = new ArrayList<>(); // Création de la liste qu'on va retourner, contenant les noms des noeuds parcourus
+        Node firstNodeLargeur = findNode(departNodeNameWidth); // Création du premier objet Node
         queue.addLast(firstNodeLargeur); // Ajout du premier Node à la queue
         firstNodeLargeur.mark(); // Premier Node marqué
         while (!queue.isEmpty()) {
-            Node currentLargeur = queue.removeFirst(); // Enlève le premier de la queue
-            nodesNameLongueur.add(currentLargeur.getName()); // Ajout du nom à la liste qu'on va retourner
-            for (Edge edge : currentLargeur.getExitingEdge().values()) { // // Parcours de tous les noms sortant du Node courant
+            Node current = queue.removeFirst(); // Enlève le premier de la queue
+            nodesNameLargeur.add(current.getName()); // Ajout du nom à la liste qu'on va retourner
+            for (Edge edge : current.getExitingEdge().values()) { // // Parcours de tous les noms sortant du Node courant
                 Node destinationNode = edge.getDestination();
                 if (!destinationNode.isMarked()) {
                     queue.addLast(destinationNode);
@@ -146,13 +152,67 @@ public class Graph {
                 }
             }
         }
-        return nodesNameLongueur;
+        System.out.println("Parcours des noeuds en largeur à partir de " + departNodeNameWidth + " : ");
+        System.out.println(nodesNameLargeur.toString());
     }
 
-    public List<String> parcoursLongueur(String departNodeNameLongueur) {
+    public void widthWay(String departNodeNameWidth, int maxLevel) {
+        reinitAll();
+        LinkedList<Node> queue = new LinkedList<>(); // Création de la queue > FIFO
+        List<String> nodesNameLargeur = new ArrayList<>(); // Création de la liste qu'on va retourner, contenant les noms des noeuds parcourus
+        Node firstNodeLargeur = findNode(departNodeNameWidth); // Création du premier objet Node
+        queue.addLast(firstNodeLargeur); // Ajout du premier Node à la queue
+        firstNodeLargeur.mark(); // Premier Node marqué
+        while (!queue.isEmpty()) {
+            Node current = queue.removeFirst(); // Enlève le premier de la queue
+            nodesNameLargeur.add(current.getName()); // Ajout du nom à la liste qu'on va retourner
+            if (current.getLevel() < maxLevel) {
+                for (Edge edge : current.getExitingEdge().values()) { // // Parcours de tous les noms sortant du Node courant
+                    Node destinationNode = edge.getDestination();
+                    if (!destinationNode.isMarked()) {
+                        queue.addLast(destinationNode);
+                        destinationNode.mark();
+                        destinationNode.setLevel(current.getLevel()+1);
+                    }
+                }
+            }
+        }
+        System.out.println("Parcours des noeuds en largeur à partir de " + departNodeNameWidth + " : ");
+        System.out.println(nodesNameLargeur.toString());
+    }
+
+    public void widthWay(String departNodeNameWidth, Class typeClass, int maxLevel) {
+        reinitAll();
+        LinkedList<Node> queue = new LinkedList<>(); // Création de la queue > FIFO
+        List<String> nodesNameLargeur = new ArrayList<>(); // Création de la liste qu'on va retourner, contenant les noms des noeuds parcourus
+        Node firstNodeLargeur = findNode(departNodeNameWidth); // Création du premier objet Node
+        queue.addLast(firstNodeLargeur); // Ajout du premier Node à la queue
+        firstNodeLargeur.mark(); // Premier Node marqué
+        while (!queue.isEmpty()) {
+            Node current = queue.removeFirst(); // Enlève le premier de la queue
+            nodesNameLargeur.add(current.getName()); // Ajout du nom à la liste qu'on va retourner
+            if (current.getLevel() < maxLevel) {
+                for (Edge edge : current.getExitingEdge().values()) { // // Parcours de tous les noms sortant du Node courant
+                    if (edge.getClass() == typeClass) {
+                        Node destinationNode = edge.getDestination();
+                        if (!destinationNode.isMarked()) {
+                            queue.addLast(destinationNode);
+                            destinationNode.mark();
+                            destinationNode.setLevel(current.getLevel()+1);
+                        }
+                    }
+                }
+            }
+        }
+        System.out.println("Parcours des noeuds en largeur à partir de " + departNodeNameWidth + " : ");
+        System.out.println(nodesNameLargeur.toString());
+    }
+
+    public void depthWay(String departNodeNameLength) {
+        reinitAll();
         LinkedList<Node> stack = new LinkedList<>();
         List<String> nodesNameLongueur = new ArrayList<>(); // Création de la liste qu'on va retourner, contenant les noms des noeuds parcourus
-        Node firstNodeLongueur = findNode(departNodeNameLongueur); // Création du premier objet Node
+        Node firstNodeLongueur = findNode(departNodeNameLength); // Création du premier objet Node
         stack.addFirst(firstNodeLongueur); // Ajout du premier Node à la pile
         firstNodeLongueur.mark(); // Premier Node marqué
         while (!stack.isEmpty()) {
@@ -166,7 +226,14 @@ public class Graph {
                 }
             }
         }
-        return nodesNameLongueur;
+        System.out.println("Parcours des noeuds en longueur :");
+        System.out.println(nodesNameLongueur.toString());
+    }
+
+    private void reinitAll() {
+        for (Node node : nodeMap.values()) {
+            node.reinit();
+        }
     }
 
     @Override
