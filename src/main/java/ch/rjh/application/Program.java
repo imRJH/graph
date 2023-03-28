@@ -2,10 +2,77 @@ package ch.rjh.application;
 
 import ch.rjh.business.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Program {
     public static void main(String[] args) {
-        amitie();
+        exerciceParcoursLimite();
+        //amitie();
         //graph();
+    }
+
+    private static void exerciceParcoursLimite() {
+
+        Graph graphe = new Graph("Exercice");
+
+        PersonNode lucie = new PersonNode("Lucie", "Neuchâtel");
+        PersonNode paul = new PersonNode("Paul", "Neuchâtel");
+        PersonNode albert = new PersonNode("Albert", "Lausanne");
+        PersonNode julie = new PersonNode("Julie", "Cernier");
+        PersonNode jean = new PersonNode("Jean", "Neuchâtel");
+        PersonNode alfred = new PersonNode("Alfred", "Lausanne");
+
+        WatchingNode disney = new WatchingNode("Disney+");
+        WatchingNode amazon = new WatchingNode("Amazon Prime Video");
+        WatchingNode netflix = new WatchingNode("Netflix");
+
+        graphe.addNode(lucie);
+        graphe.addNode(paul);
+        graphe.addNode(albert);
+        graphe.addNode(julie);
+        graphe.addNode(jean);
+        graphe.addNode(alfred);
+        graphe.addNode(disney);
+        graphe.addNode(amazon);
+        graphe.addNode(netflix);
+
+        albert.addWatching("a1", amazon);
+        albert.addWatching("a2", disney);
+        julie.addFriend("a3", albert);
+        paul.addFriend("a4", julie);
+        paul.addWatching("a5", amazon);
+        paul.addFriend("a6", jean);
+        paul.addFriend("a7", lucie);
+        paul.addWatching("a8", netflix);
+        lucie.addWatching("a9", amazon);
+        lucie.addWatching("a10", netflix);
+        jean.addFriend("a11", alfred);
+        alfred.addWatching("a12", netflix);
+
+        // Question 1 :
+        System.out.println();
+        for (Node node : graphe.widthWay(paul.getName(), IsWatchingEdge.class, 1)) {
+            System.out.print(node.getName() + "; ");
+        }
+
+        // Question 2 :
+        System.out.println();
+        for (Node node : graphe.widthWay(paul.getName(), IsFriendWithEdge.class, 2)) {
+            if(node.getExitingEdge().values().stream().anyMatch(edge -> edge instanceof IsWatchingEdge))
+                System.out.print(node.getName() + "; ");
+        }
+
+        // Question 3 :
+        System.out.println();
+        for (Node node : graphe.widthWay(paul.getName(), IsFriendWithEdge.class, 1)) {
+            if (((PersonNode)node).getVille().equals("Neuchâtel")) {
+                if (graphe.widthWay(paul.getName(), IsWatchingEdge.class,1).contains(Graph.findNode("Amazon Prime Video"))) {
+                    System.out.print(node.getName() + "; ");
+                }
+            }
+        }
+
     }
 
     private static void amitie() {
@@ -51,7 +118,8 @@ public class Program {
         System.out.println(graphe.toString());
 
         // Parcours du graphe en largeur avec un niveau :
-        graphe.widthWay(julie.getName(), IsFriendWithEdge.class,1);
+        graphe.widthWay(jean.getName(), IsFriendWithEdge.class,2);
+        graphe.widthWay(jean.getName(), IsFriendWithEdge.class,1);
         graphe.widthWay(julie.getName(), IsListeningEdge.class,1);
 
     }

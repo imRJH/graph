@@ -181,16 +181,16 @@ public class Graph {
         System.out.println(nodesNameLargeur.toString());
     }
 
-    public void widthWay(String departNodeNameWidth, Class typeClass, int maxLevel) {
+    public List<Node> widthWay(String departNodeNameWidth, Class typeClass, int maxLevel) {
         reinitAll();
         LinkedList<Node> queue = new LinkedList<>(); // Création de la queue > FIFO
-        List<String> nodesNameLargeur = new ArrayList<>(); // Création de la liste qu'on va retourner, contenant les noms des noeuds parcourus
+        List<Node> nodesNameLargeur = new ArrayList<>(); // Création de la liste qu'on va retourner, contenant les noeuds parcouru
         Node firstNodeLargeur = findNode(departNodeNameWidth); // Création du premier objet Node
         queue.addLast(firstNodeLargeur); // Ajout du premier Node à la queue
         firstNodeLargeur.mark(); // Premier Node marqué
         while (!queue.isEmpty()) {
             Node current = queue.removeFirst(); // Enlève le premier de la queue
-            nodesNameLargeur.add(current.getName()); // Ajout du nom à la liste qu'on va retourner
+            nodesNameLargeur.add(current); // Ajout du noeud à la liste qu'on va retourner
             if (current.getLevel() < maxLevel) {
                 for (Edge edge : current.getExitingEdge().values()) { // // Parcours de tous les noms sortant du Node courant
                     if (edge.getClass() == typeClass) {
@@ -204,8 +204,9 @@ public class Graph {
                 }
             }
         }
-        System.out.println("Parcours des noeuds en largeur à partir de " + departNodeNameWidth + " : ");
-        System.out.println(nodesNameLargeur.toString());
+        return nodesNameLargeur;
+        //System.out.println("Parcours des noeuds en largeur à partir de " + departNodeNameWidth + " : ");
+        //System.out.println(nodesNameLargeur.toString());
     }
 
     public void depthWay(String departNodeNameLength) {

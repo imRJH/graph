@@ -10,6 +10,14 @@ public class PersonNode extends Node {
         this.ville = ville;
     }
 
+    public String getVille() {
+        return ville;
+    }
+
+    public void setVille(String ville) {
+        this.ville = ville;
+    }
+
     public void addFriend(String edgeName, PersonNode friend) {
         Edge edge = new IsFriendWithEdge(edgeName, Graph.findNode(this.getName()), Graph.findNode(friend.getName()));
         Graph.findNode(friend.getName()).getEnteringEdge().put(edgeName, edge);
