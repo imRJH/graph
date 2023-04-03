@@ -103,6 +103,15 @@ public class Node {
         System.out.println(list);
     }
 
+    public void listExitingEdge() {
+        List<Edge> list = new ArrayList<>();
+        for (Edge edge : this.getExitingEdge().values()) {
+            list.add(edge);
+        }
+        System.out.println("Arc sortants de " + this + " :");
+        System.out.println(list);
+    }
+
     // toString :
     @Override
     public String toString() {

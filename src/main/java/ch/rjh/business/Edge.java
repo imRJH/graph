@@ -4,9 +4,9 @@ public class Edge {
 
     // Attributes :
     private String name;
-    private double metric;
     private Node source;
     private Node destination;
+    private double metric;
 
     // Constructors :
     public Edge(String name, Node destination) {
