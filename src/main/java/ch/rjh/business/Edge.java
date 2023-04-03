@@ -14,7 +14,7 @@ public class Edge {
         this.destination = destination;
     }
 
-    public Edge(String name, double metric, Node destination) {
+    public Edge(String name, Node destination, double metric) {
         this.name = name;
         this.metric = metric;
         this.destination = destination;
@@ -22,12 +22,11 @@ public class Edge {
 
     public Edge(String name, Node source, Node destination) {
         this.name = name;
-        this.metric = metric;
         this.source = source;
         this.destination = destination;
     }
 
-    public Edge(String name, double metric, Node source, Node destination) {
+    public Edge(String name, Node source, Node destination, double metric) {
         this.name = name;
         this.metric = metric;
         this.source = source;

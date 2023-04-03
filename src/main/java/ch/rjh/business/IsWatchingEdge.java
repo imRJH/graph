@@ -6,12 +6,12 @@ public class IsWatchingEdge extends Edge {
         super(name, destination);
     }
 
-    public IsWatchingEdge(String name, double metric, Node destination) {
-        super(name, metric, destination);
+    public IsWatchingEdge(String name, Node destination, double metric) {
+        super(name, destination, metric);
     }
 
-    public IsWatchingEdge(String name, double metric, Node source, Node destination) {
-        super(name, metric, source, destination);
+    public IsWatchingEdge(String name, Node source, Node destination, double metric) {
+        super(name, source, destination, metric);
     }
 
 }

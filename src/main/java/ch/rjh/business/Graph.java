@@ -1,7 +1,6 @@
 package ch.rjh.business;
 
 import java.util.*;
-import java.util.Scanner;
 
 public class Graph {
 
@@ -41,130 +40,41 @@ public class Graph {
         }
     }
 
-    public boolean isNodeExist(Node node) {
-        if (nodeMap.containsKey(node.getName()))
-            return true;
-        throw new IllegalArgumentException();
-    }
-
     public void addNode(Node node) {
         nodeMap.put(node.getName(), node);
     }
 
-    public Edge findEdge(Node node, String edgeName) {
-        try {
-            if (isNodeExist(node)) {
-                if (nodeMap.get(node.getName()).getExitingEdge().containsKey(edgeName))
-                    return nodeMap.get(node.getName()).getExitingEdge().get(edgeName);
-            }
-        } catch (IllegalArgumentException e) {
-            throw new RuntimeException(e);
-        }
-        return null;
-    }
-
-    public void listEnteringEdge(Node node) {
-        try {
-            if (isNodeExist(node)) {
-                List<Edge> list = new ArrayList<>();
-                for (Edge edge : node.getEnteringEdge().values()) {
-                    list.add(edge);
-                }
-                System.out.println("Arc entrants de " + node + " :");
-                System.out.println(list);
-            }
-        } catch (IllegalArgumentException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     public void removeNode(Node node) {
-        try {
-            if (isNodeExist(node)) {
-                for (Node nodeNavigation : this.nodeMap.values()) {
-                    Iterator<Edge> iteEdge = nodeNavigation.getExitingEdge().values().iterator();
-                    while (iteEdge.hasNext()) {
-                        Edge edge = iteEdge.next();
-                        if (nodeNavigation.equals(edge.getDestination().getName())) {
-                            iteEdge.remove();
-                        }
-                    }
+        for (Node nodeNavigation : this.nodeMap.values()) {
+            Iterator<Edge> iteEdge = nodeNavigation.getExitingEdge().values().iterator();
+            while (iteEdge.hasNext()) {
+                Edge edge = iteEdge.next();
+                if (nodeNavigation.equals(edge.getDestination().getName())) {
+                    iteEdge.remove();
                 }
-                nodeMap.remove(node);
             }
-        } catch (IllegalArgumentException e) {
-            throw new RuntimeException(e);
         }
+        nodeMap.remove(node);
     }
 
     public void removeNodeWithSource(Node node) {
-        try {
-            if (isNodeExist(node)) {
-                for (Node nodeNavigation : this.nodeMap.values()) {
-                    Iterator<Edge> exitingEdge = nodeNavigation.getExitingEdge().values().iterator();
-                    while (exitingEdge.hasNext()) {
-                        Edge edge = exitingEdge.next();
-                        if (nodeNavigation.getName().equals(edge.getDestination().getName())) {
-                            exitingEdge.remove();
-                        }
-                    }
-                    Iterator<Edge> enteringEdge = nodeNavigation.getEnteringEdge().values().iterator();
-                    while (enteringEdge.hasNext()) {
-                        Edge edge = enteringEdge.next();
-                        if (nodeNavigation.getName().equals(edge.getSource().getName())) {
-                            enteringEdge.remove();
-                        }
-                    }
+        for (Node nodeNavigation : this.nodeMap.values()) {
+            Iterator<Edge> exitingEdge = nodeNavigation.getExitingEdge().values().iterator();
+            while (exitingEdge.hasNext()) {
+                Edge edge = exitingEdge.next();
+                if (nodeNavigation.getName().equals(edge.getDestination().getName())) {
+                    exitingEdge.remove();
                 }
-                nodeMap.remove(node.getName());
             }
-        } catch (IllegalArgumentException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public void addEdge(Node nodeSource, Node nodeDestination, double metric, String edgeName) {
-        try {
-            if (isNodeExist(nodeSource) && isNodeExist(nodeDestination)) {
-                Edge edge = new Edge(edgeName, metric, nodeDestination);
-                nodeSource.getExitingEdge().put(edge.getName(), edge);
+            Iterator<Edge> enteringEdge = nodeNavigation.getEnteringEdge().values().iterator();
+            while (enteringEdge.hasNext()) {
+                Edge edge = enteringEdge.next();
+                if (nodeNavigation.getName().equals(edge.getSource().getName())) {
+                    enteringEdge.remove();
+                }
             }
-        } catch (IllegalArgumentException e) {
-            throw new RuntimeException(e);
         }
-    }
-
-    public void addEdgeWithSource(Node nodeSource, Node nodeDestination, double metric, String edgeName) {
-        try {
-            if (isNodeExist(nodeSource) && isNodeExist(nodeDestination)) {
-                Edge edge = new Edge(edgeName, metric, nodeSource, nodeDestination);
-                nodeSource.getExitingEdge().put(edge.getName(), edge);
-                nodeDestination.getEnteringEdge().put(edge.getName(), edge);
-            }
-        } catch (IllegalArgumentException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public void removeEdge(Node node, String edgeName) {
-        try {
-            if (isNodeExist(node)) {
-                node.getExitingEdge().remove(edgeName);
-            }
-        } catch (IllegalArgumentException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public void removeEdgeWithSource(Node nodeSource, Node nodeDestination, String edgeName) {
-        try {
-            if (isNodeExist(nodeSource) && isNodeExist(nodeDestination)) {
-                nodeSource.getExitingEdge().remove(edgeName);
-                nodeDestination.getEnteringEdge().remove(edgeName);
-            }
-        } catch (IllegalArgumentException e) {
-            throw new RuntimeException(e);
-        }
+        nodeMap.remove(node.getName());
     }
 
     public void widthWay(Node node) {

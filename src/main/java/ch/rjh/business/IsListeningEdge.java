@@ -6,12 +6,12 @@ public class IsListeningEdge extends Edge {
         super(name, destination);
     }
 
-    public IsListeningEdge(String name, double metric, Node destination) {
-        super(name, metric, destination);
+    public IsListeningEdge(String name, Node destination, double metric) {
+        super(name, destination, metric);
     }
 
-    public IsListeningEdge(String name, double metric, Node source, Node destination) {
-        super(name, metric, source, destination);
+    public IsListeningEdge(String name, Node source, Node destination, double metric) {
+        super(name, source, destination, metric);
     }
 
 }

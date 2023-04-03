@@ -1,6 +1,8 @@
 package ch.rjh.business;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Node {
@@ -8,9 +10,9 @@ public class Node {
     // Attributes :
     private String name;
     private int level;
+    private boolean isMarked;
     private Map<String, Edge> enteringEdge;
     private Map<String, Edge> exitingEdge;
-    private boolean isMarked;
 
     // Constructors :
     public Node(String name) {
@@ -70,6 +72,35 @@ public class Node {
     // Methods :
     public void mark() {
         this.setMarked(true);
+    }
+
+    public void addEdge(String edgeName, Node nodeDestination, double metric) {
+        Edge edge = new Edge(edgeName, nodeDestination, metric);
+        this.getExitingEdge().put(edge.getName(), edge);
+    }
+
+    public void addEdgeWithSource(String edgeName, Node nodeDestination, double metric) {
+        Edge edge = new Edge(edgeName, this, nodeDestination, metric);
+        this.getExitingEdge().put(edge.getName(), edge);
+        nodeDestination.getEnteringEdge().put(edge.getName(), edge);
+    }
+
+    public void removeEdge(String edgeName, Node node) {
+        node.getExitingEdge().remove(edgeName);
+    }
+
+    public void removeEdgeWithSource(String edgeName, Node nodeDestination) {
+        this.getExitingEdge().remove(edgeName);
+        nodeDestination.getEnteringEdge().remove(edgeName);
+    }
+
+    public void listEnteringEdge() {
+        List<Edge> list = new ArrayList<>();
+        for (Edge edge : this.getEnteringEdge().values()) {
+            list.add(edge);
+        }
+        System.out.println("Arc entrants de " + this + " :");
+        System.out.println(list);
     }
 
     // toString :

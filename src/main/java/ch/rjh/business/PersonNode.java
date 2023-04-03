@@ -3,7 +3,6 @@ package ch.rjh.business;
 public class PersonNode extends Node {
 
     private String ville;
-    private String name;
 
     public PersonNode(String name, String ville) {
         super(name);
