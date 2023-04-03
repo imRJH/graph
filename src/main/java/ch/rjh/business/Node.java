@@ -74,6 +74,11 @@ public class Node {
         this.setMarked(true);
     }
 
+    public void addEdge(String edgeName, Node nodeDestination) {
+        Edge edge = new Edge(edgeName, nodeDestination);
+        this.getExitingEdge().put(edge.getName(), edge);
+    }
+
     public void addEdge(String edgeName, Node nodeDestination, double metric) {
         Edge edge = new Edge(edgeName, nodeDestination, metric);
         this.getExitingEdge().put(edge.getName(), edge);

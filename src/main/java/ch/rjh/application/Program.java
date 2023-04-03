@@ -141,13 +141,13 @@ public class Program {
         g.addNode(e);
 
         // Ajout d'edges :
-        a.addEdge("u1", c,1);
-        a.addEdge("u2", b,1);
-        a.addEdge("u3", d,1);
-        b.addEdge("u4", d,1);
-        c.addEdge("u5", d,1);
-        d.addEdge("u6", e,1);
-        c.addEdge("u7", e,1);
+        a.addEdge("u1", c);
+        a.addEdge("u2", b);
+        a.addEdge("u3", d);
+        b.addEdge("u4", d);
+        c.addEdge("u5", d);
+        d.addEdge("u6", e);
+        c.addEdge("u7", e);
         System.out.println(g);
 
         // Pacours en largeur avec un niveau :
