@@ -2,14 +2,11 @@ package ch.rjh.application;
 
 import ch.rjh.business.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Program {
     public static void main(String[] args) {
-        exerciceParcoursLimite();
-        //amitie();
-        //graph();
+        //exerciceParcoursLimite();
+        //friendshipGraph();
+        //firstGraph();
     }
 
     private static void exerciceParcoursLimite() {
@@ -52,22 +49,22 @@ public class Program {
 
         // Question 1 :
         System.out.println();
-        for (Node node : graphe.widthWay(paul.getName(), IsWatchingEdge.class, 1)) {
+        for (Node node : graphe.widthWay(paul, IsWatchingEdge.class, 1)) {
             System.out.print(node.getName() + "; ");
         }
 
         // Question 2 :
         System.out.println();
-        for (Node node : graphe.widthWay(paul.getName(), IsFriendWithEdge.class, 2)) {
+        for (Node node : graphe.widthWay(paul, IsFriendWithEdge.class, 2)) {
             if(node.getExitingEdge().values().stream().anyMatch(edge -> edge instanceof IsWatchingEdge))
                 System.out.print(node.getName() + "; ");
         }
 
         // Question 3 :
         System.out.println();
-        for (Node node : graphe.widthWay(paul.getName(), IsFriendWithEdge.class, 1)) {
+        for (Node node : graphe.widthWay(paul, IsFriendWithEdge.class, 1)) {
             if (((PersonNode)node).getVille().equals("Neuchâtel")) {
-                if (graphe.widthWay(paul.getName(), IsWatchingEdge.class,1).contains(Graph.findNode("Amazon Prime Video"))) {
+                if (graphe.widthWay(paul, IsWatchingEdge.class,1).contains(graphe.findNode("Amazon Prime Video"))) {
                     System.out.print(node.getName() + "; ");
                 }
             }
@@ -75,7 +72,7 @@ public class Program {
 
     }
 
-    private static void amitie() {
+    private static void friendshipGraph() {
 
         // Création du graphe :
         Graph graphe = new Graph("Amitiés");
@@ -118,27 +115,43 @@ public class Program {
         System.out.println(graphe.toString());
 
         // Parcours du graphe en largeur avec un niveau :
-        graphe.widthWay(jean.getName(), IsFriendWithEdge.class,2);
-        graphe.widthWay(jean.getName(), IsFriendWithEdge.class,1);
-        graphe.widthWay(julie.getName(), IsListeningEdge.class,1);
+        graphe.widthWay(jean, IsFriendWithEdge.class,2);
+        graphe.widthWay(jean, IsFriendWithEdge.class,1);
+        graphe.widthWay(julie, IsListeningEdge.class,1);
 
     }
 
-    private static void graph() {
+    private static void firstGraph() {
 
         // Création du graphe :
         Graph g = new Graph("G1");
-        g.addEdgeWithSource("A","C",1,"u1");
-        g.addEdgeWithSource("A","B",1,"u2");
-        g.addEdgeWithSource("A","D",1,"u3");
-        g.addEdgeWithSource("B","D",1,"u4");
-        g.addEdgeWithSource("C","D",1,"u5");
-        g.addEdgeWithSource("D","E",1,"u6");
-        g.addEdgeWithSource("C","E",1,"u7");
-        System.out.println(g.toString());
+
+        // Création des noeuds :
+        Node a = new Node("A");
+        Node b = new Node("B");
+        Node c = new Node("C");
+        Node d = new Node("D");
+        Node e = new Node("E");
+
+        // Ajout des noeuds :
+        g.addNode(a);
+        g.addNode(b);
+        g.addNode(c);
+        g.addNode(d);
+        g.addNode(e);
+
+        // Ajout d'edges :
+        g.addEdgeWithSource(a,c,1,"u1");
+        g.addEdgeWithSource(a,b,1,"u2");
+        g.addEdgeWithSource(a,d,1,"u3");
+        g.addEdgeWithSource(b,d,1,"u4");
+        g.addEdgeWithSource(c,d,1,"u5");
+        g.addEdgeWithSource(d,e,1,"u6");
+        g.addEdgeWithSource(c,e,1,"u7");
+        System.out.println(g);
 
         // Pacours en largeur avec un niveau :
-        g.widthWay("A", 1);
+        g.widthWay(a, 1);
 
     }
 

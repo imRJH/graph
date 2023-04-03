@@ -19,21 +19,21 @@ public class PersonNode extends Node {
     }
 
     public void addFriend(String edgeName, PersonNode friend) {
-        Edge edge = new IsFriendWithEdge(edgeName, Graph.findNode(this.getName()), Graph.findNode(friend.getName()));
-        Graph.findNode(friend.getName()).getEnteringEdge().put(edgeName, edge);
-        Graph.findNode(this.getName()).getExitingEdge().put(edgeName, edge);
+        Edge edge = new IsFriendWithEdge(edgeName, this, friend);
+        friend.getEnteringEdge().put(edgeName, edge);
+        this.getExitingEdge().put(edgeName, edge);
     }
 
     public void addListening(String edgeName, ListeningNode listen) {
-        Edge edge = new IsListeningEdge(edgeName, Graph.findNode(listen.getName()));
-        Graph.findNode(listen.getName()).getEnteringEdge().put(edgeName, edge);
-        Graph.findNode(this.getName()).getExitingEdge().put(edgeName, edge);
+        Edge edge = new IsListeningEdge(edgeName, listen);
+        listen.getEnteringEdge().put(edgeName, edge);
+        this.getExitingEdge().put(edgeName, edge);
     }
 
     public void addWatching(String edgeName, WatchingNode watch) {
-        Edge edge = new IsWatchingEdge(edgeName, Graph.findNode(watch.getName()));
-        Graph.findNode(watch.getName()).getEnteringEdge().put(edgeName, edge);
-        Graph.findNode(this.getName()).getExitingEdge().put(edgeName, edge);
+        Edge edge = new IsWatchingEdge(edgeName, watch);
+        watch.getEnteringEdge().put(edgeName, edge);
+        this.getExitingEdge().put(edgeName, edge);
     }
 
 }
