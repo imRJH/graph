@@ -14,6 +14,7 @@ public class Node {
     private Node dijkstraPred;
     private Map<String, Edge> enteringEdge;
     private Map<String, Edge> exitingEdge;
+    private Map<String, Node> vpcc;
 
     public Node(String name) {
         this.name = name;
@@ -21,6 +22,7 @@ public class Node {
         this.isMarked = false;
         enteringEdge = new HashMap<>();
         exitingEdge = new HashMap<>();
+        vpcc = new HashMap<>();
     }
 
     public String getName() {
@@ -77,6 +79,14 @@ public class Node {
 
     public void setExitingEdge(Map<String, Edge> exitingEdge) {
         this.exitingEdge = exitingEdge;
+    }
+
+    public Map<String, Node> getVpcc() {
+        return vpcc;
+    }
+
+    public void setVpcc(Map<String, Node> vpcc) {
+        this.vpcc = vpcc;
     }
 
     /**

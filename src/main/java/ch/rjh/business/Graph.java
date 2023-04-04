@@ -209,9 +209,11 @@ public class Graph {
 
             Collections.sort(priorityList, new DijkstraNodeComparator());
             currentNode = (Node)priorityList.remove(0);
+            Node copyNode = currentNode;
+            startNode.getVpcc().put(copyNode.getName(), copyNode);
 
             // ToDo : Afficher triplet
-            System.out.println();
+            //System.out.println();
 
             for (Iterator ita = currentNode.getExitingEdge().values().iterator(); ita.hasNext();) {
                 tempEdge = (Edge) ita.next();
@@ -232,6 +234,8 @@ public class Graph {
             }
 
         }
+
+        System.out.println("DIJKSTRA DONE " + startNode.getVpcc().size());
 
     }
 

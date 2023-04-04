@@ -4,7 +4,7 @@ import ch.rjh.business.*;
 
 public class Program {
     public static void main(String[] args) {
-        //new Program().firstDijkstra();
+        new Program().firstDijkstra();
         //new Program().multipleNodeTypeWay();
         //new Program().friendshipGraph();
         //new Program().firstGraph();
@@ -33,9 +33,7 @@ public class Program {
         albert.addFriend("a3", julie, 1);
         albert.addFriend("a4", jean, 1);
 
-        graphe.dijkstra(albert);
-        System.out.println(paul.getDijkstraWeight());
-        System.out.println(paul.getDijkstraPred());
+        graphe.dijkstra(lucie);
 
     }
 
