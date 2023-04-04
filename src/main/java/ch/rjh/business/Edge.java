@@ -24,16 +24,8 @@ public class Edge {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public double getMetric() {
         return metric;
-    }
-
-    public void setMetric(double metric) {
-        this.metric = metric;
     }
 
     public Node getDestination() {
@@ -42,14 +34,6 @@ public class Edge {
 
     public Node getSource() {
         return source;
-    }
-
-    public void setSource(Node source) {
-        this.source = source;
-    }
-
-    public void setDestination(Node destination) {
-        this.destination = destination;
     }
 
     /**

@@ -18,18 +18,6 @@ public class Graph {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Map<String, Node> getNodeMap() {
-        return nodeMap;
-    }
-
-    public void setNodeMap(Map<String, Node> nodeMap) {
-        this.nodeMap = nodeMap;
-    }
-
     /**
      * Ajouter un noeud au graphe
      * @param node Noeud à ajouter

@@ -45,10 +45,6 @@ public class Node {
         return enteringEdge;
     }
 
-    public void setEnteringEdge(Map<String, Edge> enteringEdge) {
-        this.enteringEdge = enteringEdge;
-    }
-
     public boolean isMarked() {
         return isMarked;
     }
@@ -77,16 +73,8 @@ public class Node {
         return exitingEdge;
     }
 
-    public void setExitingEdge(Map<String, Edge> exitingEdge) {
-        this.exitingEdge = exitingEdge;
-    }
-
     public Map<String, Node> getVpcc() {
         return vpcc;
-    }
-
-    public void setVpcc(Map<String, Node> vpcc) {
-        this.vpcc = vpcc;
     }
 
     /**

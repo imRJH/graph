@@ -11,6 +11,7 @@ public class utils {
 
     /**
      * Parcours en largeur à partir d'un noeud
+     * @param graph Graphe sur lequel appliquer le parcous
      * @param node Noeud de départ
      * @return Liste de noeuds
      */
@@ -36,6 +37,7 @@ public class utils {
 
     /**
      * Parcours en largeur à partir d'un noeud
+     * @param graph Graphe sur lequel appliquer le parcous
      * @param node Noeud de départ
      * @param maxLevel Niveau de détail
      * @return Liste de noeuds
@@ -65,6 +67,7 @@ public class utils {
 
     /**
      * Parcours en largeur à partir d'un noeud
+     * @param graph Graphe sur lequel appliquer le parcous
      * @param node Noeud de départ
      * @param typeClass Afficher un type de classe spécifique
      * @param maxLevel Niveau de détail
@@ -97,6 +100,7 @@ public class utils {
 
     /**
      * Parcours en profondeur à partir d'un noeud
+     * @param graph Graphe sur lequel appliquer le parcous
      * @param node Noeud de départ
      * @return Liste de noeuds
      */
@@ -122,7 +126,7 @@ public class utils {
 
     /**
      * Parcours selon algorithme de Dijkstra
-     * @param graph Graphe à parcourir
+     * @param graph Graphe sur lequel appliquer l'algorithme
      * @param startNode Noeud de départ
      */
     public static void dijkstra(Graph graph, Node startNode) {
