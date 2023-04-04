@@ -73,7 +73,7 @@ public class Program {
         System.out.println();
         for (Node node : graphe.widthWay(paul, IsFriendWithEdge.class, 1)) {
             if (((PersonNode)node).getVille().equals("Neuchâtel")) {
-                if (graphe.widthWay(paul, IsWatchingEdge.class,1).contains(amazon)) {
+                if (graphe.widthWay(node, IsWatchingEdge.class,1).contains(amazon)) {
                     System.out.print(node.getName() + "; ");
                 }
             }
@@ -120,13 +120,19 @@ public class Program {
         jean.addWatching("a7", youtube);
         carlos.addWatching("a8", netflix);
 
-        // Afficher le graphe :
-        System.out.println(graphe);
-
         // Parcours du graphe en largeur avec un niveau :
-        graphe.widthWay(jean, IsFriendWithEdge.class,2);
-        graphe.widthWay(jean, IsFriendWithEdge.class,1);
-        graphe.widthWay(julie, IsListeningEdge.class,1);
+        System.out.println();
+        for (Node node : graphe.widthWay(jean, IsFriendWithEdge.class,2)) {
+            System.out.print(node.getName() + "; ");
+        }
+        System.out.println();
+        for (Node node : graphe.widthWay(jean, IsFriendWithEdge.class,1)) {
+            System.out.print(node.getName() + "; ");
+        }
+        System.out.println();
+        for (Node node : graphe.widthWay(julie, IsListeningEdge.class,1)) {
+            System.out.print(node.getName() + "; ");
+        }
 
     }
 
