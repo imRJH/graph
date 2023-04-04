@@ -10,7 +10,7 @@ public class Node {
     private String name;
     private int level;
     private boolean isMarked;
-    private int dijkstraWeight;
+    private double dijkstraWeight;
     private Node dijkstraPred;
     private Map<String, Edge> enteringEdge;
     private Map<String, Edge> exitingEdge;
@@ -55,11 +55,11 @@ public class Node {
         isMarked = marked;
     }
 
-    public int getDijkstraWeight() {
+    public double getDijkstraWeight() {
         return dijkstraWeight;
     }
 
-    public void setDijkstraWeight(int dijkstraWeight) {
+    public void setDijkstraWeight(double dijkstraWeight) {
         this.dijkstraWeight = dijkstraWeight;
     }
 

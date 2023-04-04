@@ -1,5 +1,7 @@
 package ch.rjh.business;
 
+import ch.rjh.dijkstra.DijkstraNodeComparator;
+
 import java.util.*;
 
 public class Graph {
@@ -199,6 +201,51 @@ public class Graph {
         }
         System.out.println("Parcours des noeuds en longueur à partir de " + node + " : ");
         System.out.println(nodesNameLongueur);
+    }
+
+    public void dijkstra(Node startNode) {
+
+        final int INT_MAX = Integer.MAX_VALUE;
+        System.out.println("\nRUNNING DIJKSTRA...");
+
+        // Préparation avant algorithme :
+        reinitAllBeforeDijkstra();
+        Node currentNode, destinationNode;
+        Edge tempEdge;
+        double currentWeight;
+        List<Node> priorityList = new ArrayList<>();
+        startNode.setDijkstraWeight(0);
+        priorityList.add(startNode);
+
+        // Algorithme :
+        while (!priorityList.isEmpty()) {
+
+            Collections.sort(priorityList, new DijkstraNodeComparator());
+            currentNode = (Node)priorityList.remove(0);
+
+            // ToDo : Afficher triplet
+            System.out.println();
+
+            for (Iterator ita = currentNode.getExitingEdge().values().iterator(); ita.hasNext();) {
+                tempEdge = (Edge) ita.next();
+                destinationNode = tempEdge.getDestination();
+                currentWeight = currentNode.getDijkstraWeight() + tempEdge.getMetric();
+
+                // Relâchement et ajout à la liste de priorité :
+                if (destinationNode.getDijkstraWeight() == INT_MAX) {
+                    priorityList.add(destinationNode);
+                }
+
+                // Relachement :
+                if (currentWeight < destinationNode.getDijkstraWeight()) {
+                    destinationNode.setDijkstraWeight(currentWeight);
+                    destinationNode.setDijkstraPred(currentNode);
+                }
+
+            }
+
+        }
+
     }
 
     /**

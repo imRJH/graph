@@ -4,14 +4,39 @@ import ch.rjh.business.*;
 
 public class Program {
     public static void main(String[] args) {
-        new Program().firstDijkstra();
+        //new Program().firstDijkstra();
         //new Program().multipleNodeTypeWay();
         //new Program().friendshipGraph();
         //new Program().firstGraph();
     }
 
     private void firstDijkstra() {
-        System.out.println("Hello");
+
+        Graph graphe = new Graph("Exercice");
+
+        PersonNode lucie = new PersonNode("Lucie", "Neuchâtel");
+        PersonNode paul = new PersonNode("Paul", "Neuchâtel");
+        PersonNode albert = new PersonNode("Albert", "Lausanne");
+        PersonNode julie = new PersonNode("Julie", "Cernier");
+        PersonNode jean = new PersonNode("Jean", "Neuchâtel");
+        PersonNode alfred = new PersonNode("Alfred", "Lausanne");
+
+        graphe.addNode(lucie);
+        graphe.addNode(paul);
+        graphe.addNode(albert);
+        graphe.addNode(julie);
+        graphe.addNode(jean);
+        graphe.addNode(alfred);
+
+        lucie.addFriend("a1", paul, 1);
+        paul.addFriend("a2", albert, 1);
+        albert.addFriend("a3", julie, 1);
+        albert.addFriend("a4", jean, 1);
+
+        graphe.dijkstra(albert);
+        System.out.println(paul.getDijkstraWeight());
+        System.out.println(paul.getDijkstraPred());
+
     }
 
     private void multipleNodeTypeWay() {
