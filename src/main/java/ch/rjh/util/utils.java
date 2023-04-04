@@ -131,8 +131,6 @@ public class utils {
      */
     private static void dijkstra(Graph graph, Node startNode) {
 
-        final int INT_MAX = Integer.MAX_VALUE;
-
         // Préparation avant algorithme :
         graph.reinitAllBeforeDijkstra();
         Node currentNode, destinationNode;
@@ -156,7 +154,7 @@ public class utils {
                 currentWeight = currentNode.getDijkstraWeight() + tempEdge.getMetric();
 
                 // Relâchement et ajout à la liste de priorité :
-                if (destinationNode.getDijkstraWeight() == INT_MAX) {
+                if (destinationNode.getDijkstraWeight() == Integer.MAX_VALUE) {
                     priorityList.add(destinationNode);
                 }
 
@@ -186,6 +184,18 @@ public class utils {
         if (nodeSource.getVpcc().isEmpty()) {
             dijkstra(graph, nodeSource);
         }
+
+        // Test si atteignable :
+        Node nodeTest = nodeSource.getVpcc().get(nodeDestination.getName());
+        if (nodeTest == null) {
+            StringBuilder message = new StringBuilder();
+            message.append("\nChemin impossible entre les noeuds demandés.");
+            message.append("\nEssayer un autre argument.");
+            throw new IllegalArgumentException(message.toString());
+        }
+
+        // Affichage :
+        System.out.println("\nChemin le plus court entre " + nodeSource.getName() + " et " + nodeDestination.getName() + " : ");
 
         // Algorithme :
         while (nodeDestination != null) {

@@ -6,9 +6,9 @@ import ch.rjh.util.utils;
 public class Program {
     public static void main(String[] args) {
         new Program().firstDijkstra();
-        new Program().multipleNodeTypeWay();
-        new Program().friendshipGraph();
-        new Program().firstGraph();
+        //new Program().multipleNodeTypeWay();
+        //new Program().friendshipGraph();
+        //new Program().firstGraph();
     }
 
     private void firstDijkstra() {
@@ -48,7 +48,7 @@ public class Program {
         h.addEdge("u12", g, 9);
         d.addEdge("u14", a, 1);
 
-        System.out.println(utils.shortestPath(graphe, b, e));
+        System.out.println(utils.shortestPath(graphe, b, h));
 
     }
 
