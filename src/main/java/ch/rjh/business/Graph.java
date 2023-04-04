@@ -1,7 +1,5 @@
 package ch.rjh.business;
 
-import ch.rjh.dijkstra.DijkstraNodeComparator;
-
 import java.util.*;
 
 public class Graph {

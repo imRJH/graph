@@ -129,10 +129,9 @@ public class utils {
      * @param graph Graphe sur lequel appliquer l'algorithme
      * @param startNode Noeud de départ
      */
-    public static void dijkstra(Graph graph, Node startNode) {
+    private static void dijkstra(Graph graph, Node startNode) {
 
         final int INT_MAX = Integer.MAX_VALUE;
-        System.out.println("\nRUNNING DIJKSTRA...");
 
         // Préparation avant algorithme :
         graph.reinitAllBeforeDijkstra();
@@ -150,9 +149,6 @@ public class utils {
             currentNode = (Node)priorityList.remove(0);
             Node copyNode = currentNode;
             startNode.getVpcc().put(copyNode.getName(), copyNode);
-
-            // ToDo : Afficher triplet
-            //System.out.println();
 
             for (Iterator ita = currentNode.getExitingEdge().values().iterator(); ita.hasNext();) {
                 tempEdge = (Edge) ita.next();
@@ -174,7 +170,37 @@ public class utils {
 
         }
 
-        System.out.println("DIJKSTRA DONE " + startNode.getVpcc().size());
+    }
+
+    /**
+     * Affichange en console du parcous le plus court entre deux noeuds
+     * @param graph Graphe sur lequel appliquer l'algorithme
+     * @param nodeSource Noeud de départ
+     * @param nodeDestination Noeud de destination
+     * @return Le chemin sous forme de String avec des espaces
+     */
+    public static String shortestPath(Graph graph, Node nodeSource, Node nodeDestination) {
+
+        // Préparation avant algorithme :
+        LinkedList<Node> path = new LinkedList<>();
+        if (nodeSource.getVpcc().isEmpty()) {
+            dijkstra(graph, nodeSource);
+        }
+
+        // Algorithme :
+        while (nodeDestination != null) {
+            path.addFirst(nodeDestination);
+            nodeDestination = nodeDestination.getDijkstraPred();
+        }
+
+        // StringBuilder afin de retourner un objet String
+        StringBuilder sb = new StringBuilder();
+        sb.append("Les étapes sont : ");
+        for (Node node : path) {
+            sb.append(" ").append(node.getName());
+        }
+        sb.append("\n");
+        return sb.toString();
 
     }
 

@@ -77,6 +77,10 @@ public class Node {
         return vpcc;
     }
 
+    public void setVpcc(Map<String, Node> vpcc) {
+        this.vpcc = vpcc;
+    }
+
     /**
      * Réaliser un marquage sur un noeud (lors d'un parcous)
      */

@@ -5,18 +5,24 @@ import ch.rjh.util.utils;
 
 public class Program {
     public static void main(String[] args) {
-        //new Program().firstDijkstra();
-        //new Program().multipleNodeTypeWay();
-        //new Program().friendshipGraph();
-        //new Program().firstGraph();
+        new Program().firstDijkstra();
+        new Program().multipleNodeTypeWay();
+        new Program().friendshipGraph();
+        new Program().firstGraph();
     }
 
     private void firstDijkstra() {
 
         Graph graphe = new Graph("Exercice");
 
-        Node a = new Node("A"), b = new Node("B"), c = new Node("C"), d = new Node("D"),
-                e = new Node("E"), f = new Node("F"), g = new Node("G"), h = new Node("H");
+        Node a = new Node("A"),
+                b = new Node("B"),
+                c = new Node("C"),
+                d = new Node("D"),
+                e = new Node("E"),
+                f = new Node("F"),
+                g = new Node("G"),
+                h = new Node("H");
 
         graphe.addNode(a);
         graphe.addNode(b);
@@ -42,7 +48,7 @@ public class Program {
         h.addEdge("u12", g, 9);
         d.addEdge("u14", a, 1);
 
-        utils.dijkstra(graphe, a);
+        System.out.println(utils.shortestPath(graphe, b, e));
 
     }
 
