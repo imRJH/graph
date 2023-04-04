@@ -1,7 +1,7 @@
 package ch.rjh.application;
 
 import ch.rjh.business.*;
-import ch.rjh.util.utils;
+import ch.rjh.util.Utils;
 
 public class Program {
     public static void main(String[] args) {
@@ -48,7 +48,7 @@ public class Program {
         h.addEdge("u12", g, 9);
         d.addEdge("u14", a, 1);
 
-        System.out.println(utils.shortestPath(graphe, b, h));
+        System.out.println(Utils.shortestPath(graphe, b, e));
 
     }
 
@@ -95,7 +95,7 @@ public class Program {
         Lister tous les sites de streaming regardés par Paul.
          */
         System.out.println("\nQuestion 1 :");
-        for (Node node : utils.widthWay(graphe, paul, IsWatchingEdge.class, 1)) {
+        for (Node node : Utils.widthWay(graphe, paul, IsWatchingEdge.class, 1)) {
             System.out.print(node.getName() + "; ");
         }
 
@@ -104,7 +104,7 @@ public class Program {
         Donner tous les amis de Paul jusqu’au 2e niveau qui regardent un site de streaming.
          */
         System.out.println("\nQuestion 2 :");
-        for (Node node : utils.widthWay(graphe, paul, IsFriendWithEdge.class, 2)) {
+        for (Node node : Utils.widthWay(graphe, paul, IsFriendWithEdge.class, 2)) {
             if(node.getExitingEdge().values().stream().anyMatch(edge -> edge instanceof IsWatchingEdge))
                 System.out.print(node.getName() + "; ");
         }
@@ -114,9 +114,9 @@ public class Program {
         Lister tous les amis (1er niveau) de Paul qui habitent à NE et qui regardent Amazon Prime Video.
          */
         System.out.println("\nQuestion 3 :");
-        for (Node node : utils.widthWay(graphe, paul, IsFriendWithEdge.class, 1)) {
+        for (Node node : Utils.widthWay(graphe, paul, IsFriendWithEdge.class, 1)) {
             if (((PersonNode)node).getVille().equals("Neuchâtel")) {
-                if (utils.widthWay(graphe, node, IsWatchingEdge.class,1).contains(amazon)) {
+                if (Utils.widthWay(graphe, node, IsWatchingEdge.class,1).contains(amazon)) {
                     System.out.print(node.getName() + "; ");
                 }
             }
@@ -165,15 +165,15 @@ public class Program {
 
         // Parcours du graphe en largeur avec un niveau :
         System.out.println();
-        for (Node node : utils.widthWay(graphe, jean, IsFriendWithEdge.class,2)) {
+        for (Node node : Utils.widthWay(graphe, jean, IsFriendWithEdge.class,2)) {
             System.out.print(node.getName() + "; ");
         }
         System.out.println();
-        for (Node node : utils.widthWay(graphe, jean, IsFriendWithEdge.class,1)) {
+        for (Node node : Utils.widthWay(graphe, jean, IsFriendWithEdge.class,1)) {
             System.out.print(node.getName() + "; ");
         }
         System.out.println();
-        for (Node node : utils.widthWay(graphe, julie, IsListeningEdge.class,1)) {
+        for (Node node : Utils.widthWay(graphe, julie, IsListeningEdge.class,1)) {
             System.out.print(node.getName() + "; ");
         }
 
@@ -209,7 +209,7 @@ public class Program {
         System.out.println(graph);
 
         // Pacours en largeur avec un niveau :
-        utils.widthWay(graph, a, 1);
+        Utils.widthWay(graph, a, 1);
 
     }
 

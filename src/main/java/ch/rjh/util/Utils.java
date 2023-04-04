@@ -7,7 +7,7 @@ import ch.rjh.dijkstra.DijkstraNodeComparator;
 
 import java.util.*;
 
-public class utils {
+public class Utils {
 
     /**
      * Parcours en largeur à partir d'un noeud
@@ -192,10 +192,9 @@ public class utils {
             message.append("\nChemin impossible entre les noeuds demandés.");
             message.append("\nEssayer un autre argument.");
             throw new IllegalArgumentException(message.toString());
+        } else {
+            System.out.println("\nChemin le plus court entre " + nodeSource.getName() + " et " + nodeDestination.getName() + " : ");
         }
-
-        // Affichage :
-        System.out.println("\nChemin le plus court entre " + nodeSource.getName() + " et " + nodeDestination.getName() + " : ");
 
         // Algorithme :
         while (nodeDestination != null) {
