@@ -96,7 +96,7 @@ public class Graph {
      * @return Liste de noeuds
      */
     public List<Node> widthWay(Node node) {
-        reinitAll();
+        reinitAllBeforeWay();
         LinkedList<Node> queue = new LinkedList<>(); // Création de la queue > FIFO
         List<Node> nodesNameLargeur = new ArrayList<>(); // Création de la liste qu'on va retourner, contenant les noms des noeuds parcourus
         queue.addLast(node); // Ajout du premier Node à la queue
@@ -122,7 +122,7 @@ public class Graph {
      * @return Liste de noeuds
      */
     public List<Node> widthWay(Node node, int maxLevel) {
-        reinitAll();
+        reinitAllBeforeWay();
         LinkedList<Node> queue = new LinkedList<>(); // Création de la queue > FIFO
         List<Node> nodesNameLargeur = new ArrayList<>(); // Création de la liste qu'on va retourner, contenant les noms des noeuds parcourus
         queue.addLast(node); // Ajout du premier Node à la queue
@@ -152,7 +152,7 @@ public class Graph {
      * @return Liste de noeuds
      */
     public List<Node> widthWay(Node node, Class typeClass, int maxLevel) {
-        reinitAll();
+        reinitAllBeforeWay();
         LinkedList<Node> queue = new LinkedList<>(); // Création de la queue > FIFO
         List<Node> nodesNameLargeur = new ArrayList<>(); // Création de la liste qu'on va retourner, contenant les noeuds parcouru
         queue.addLast(node); // Ajout du premier Node à la queue
@@ -181,7 +181,7 @@ public class Graph {
      * @param node Noeud de départ
      */
     public void depthWay(Node node) {
-        reinitAll();
+        reinitAllBeforeWay();
         LinkedList<Node> stack = new LinkedList<>();
         List<String> nodesNameLongueur = new ArrayList<>(); // Création de la liste qu'on va retourner, contenant les noms des noeuds parcourus
         stack.addFirst(node); // Ajout du premier Node à la pile
@@ -202,11 +202,20 @@ public class Graph {
     }
 
     /**
-     * Réinitialise tous les noeuds du graphe
+     * Réinitialise tous les noeuds du graphe avant un parcous
      */
-    private void reinitAll() {
+    private void reinitAllBeforeWay() {
         for (Node node : nodeMap.values()) {
-            node.reinit();
+            node.reinitBeforeWay();
+        }
+    }
+
+    /**
+     * Réinitialise tous les noeuds du graphe avant un algorithme Dijkstra
+     */
+    private void reinitAllBeforeDijkstra() {
+        for (Node node : nodeMap.values()) {
+            node.reinitBeforeDijkstra();
         }
     }
 

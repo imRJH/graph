@@ -10,6 +10,8 @@ public class Node {
     private String name;
     private int level;
     private boolean isMarked;
+    private int dijkstraWeight;
+    private Node dijkstraPred;
     private Map<String, Edge> enteringEdge;
     private Map<String, Edge> exitingEdge;
 
@@ -53,6 +55,22 @@ public class Node {
         isMarked = marked;
     }
 
+    public int getDijkstraWeight() {
+        return dijkstraWeight;
+    }
+
+    public void setDijkstraWeight(int dijkstraWeight) {
+        this.dijkstraWeight = dijkstraWeight;
+    }
+
+    public Node getDijkstraPred() {
+        return dijkstraPred;
+    }
+
+    public void setDijkstraPred(Node dijkstraPred) {
+        this.dijkstraPred = dijkstraPred;
+    }
+
     public Map<String, Edge> getExitingEdge() {
         return exitingEdge;
     }
@@ -69,13 +87,23 @@ public class Node {
     }
 
     /**
-     * Réinitialise un noeud (avant un parcours) :
+     * Réinitialise un noeud avant un parcours :
      * Le niveau est remis par défaut
      * Le marquage est supprimé
      */
-    public void reinit() {
+    public void reinitBeforeWay() {
         this.level = 0;
         this.isMarked = false;
+    }
+
+    /**
+     * Réinitialise un noeud avant un algorithme Dijkstra
+     * Le poids et mis à l'infini
+     * Le noeud prédécesseur est mis à null
+     */
+    public void reinitBeforeDijkstra() {
+        this.dijkstraWeight = Integer.MAX_VALUE;
+        this.dijkstraPred = null;
     }
 
     /**
