@@ -93,16 +93,17 @@ public class Graph {
     /**
      * Parcours en largeur à partir d'un noeud
      * @param node Noeud de départ
+     * @return Liste de noeuds
      */
-    public void widthWay(Node node) {
+    public List<Node> widthWay(Node node) {
         reinitAll();
         LinkedList<Node> queue = new LinkedList<>(); // Création de la queue > FIFO
-        List<String> nodesNameLargeur = new ArrayList<>(); // Création de la liste qu'on va retourner, contenant les noms des noeuds parcourus
+        List<Node> nodesNameLargeur = new ArrayList<>(); // Création de la liste qu'on va retourner, contenant les noms des noeuds parcourus
         queue.addLast(node); // Ajout du premier Node à la queue
         node.mark(); // Premier Node marqué
         while (!queue.isEmpty()) {
             Node current = queue.removeFirst(); // Enlève le premier de la queue
-            nodesNameLargeur.add(current.getName()); // Ajout du nom à la liste qu'on va retourner
+            nodesNameLargeur.add(current); // Ajout du nom à la liste qu'on va retourner
             for (Edge edge : current.getExitingEdge().values()) { // // Parcours de tous les noms sortant du Node courant
                 Node destinationNode = edge.getDestination();
                 if (!destinationNode.isMarked()) {
@@ -111,24 +112,24 @@ public class Graph {
                 }
             }
         }
-        System.out.println("Parcours des noeuds en largeur à partir de " + node + " : ");
-        System.out.println(nodesNameLargeur);
+        return nodesNameLargeur;
     }
 
     /**
      * Parcours en largeur à partir d'un noeud
      * @param node Noeud de départ
      * @param maxLevel Niveau de détail
+     * @return Liste de noeuds
      */
-    public void widthWay(Node node, int maxLevel) {
+    public List<Node> widthWay(Node node, int maxLevel) {
         reinitAll();
         LinkedList<Node> queue = new LinkedList<>(); // Création de la queue > FIFO
-        List<String> nodesNameLargeur = new ArrayList<>(); // Création de la liste qu'on va retourner, contenant les noms des noeuds parcourus
+        List<Node> nodesNameLargeur = new ArrayList<>(); // Création de la liste qu'on va retourner, contenant les noms des noeuds parcourus
         queue.addLast(node); // Ajout du premier Node à la queue
         node.mark(); // Premier Node marqué
         while (!queue.isEmpty()) {
             Node current = queue.removeFirst(); // Enlève le premier de la queue
-            nodesNameLargeur.add(current.getName()); // Ajout du nom à la liste qu'on va retourner
+            nodesNameLargeur.add(current); // Ajout du nom à la liste qu'on va retourner
             if (current.getLevel() < maxLevel) {
                 for (Edge edge : current.getExitingEdge().values()) { // // Parcours de tous les noms sortant du Node courant
                     Node destinationNode = edge.getDestination();
@@ -140,8 +141,7 @@ public class Graph {
                 }
             }
         }
-        System.out.println("Parcours des noeuds en largeur à partir de " + node + " : ");
-        System.out.println(nodesNameLargeur);
+        return nodesNameLargeur;
     }
 
     /**
