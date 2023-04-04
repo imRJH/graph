@@ -51,7 +51,7 @@ public class Program {
         Question 1 :
         Lister tous les sites de streaming regardés par Paul.
          */
-        System.out.println();
+        System.out.println("\nQuestion 1 :");
         for (Node node : graphe.widthWay(paul, IsWatchingEdge.class, 1)) {
             System.out.print(node.getName() + "; ");
         }
@@ -60,7 +60,7 @@ public class Program {
         Question 2 :
         Donner tous les amis de Paul jusqu’au 2e niveau qui regardent un site de streaming.
          */
-        System.out.println();
+        System.out.println("\nQuestion 2 :");
         for (Node node : graphe.widthWay(paul, IsFriendWithEdge.class, 2)) {
             if(node.getExitingEdge().values().stream().anyMatch(edge -> edge instanceof IsWatchingEdge))
                 System.out.print(node.getName() + "; ");
@@ -70,7 +70,7 @@ public class Program {
         Question 3 :
         Lister tous les amis (1er niveau) de Paul qui habitent à NE et qui regardent Amazon Prime Video.
          */
-        System.out.println();
+        System.out.println("\nQuestion 3 :");
         for (Node node : graphe.widthWay(paul, IsFriendWithEdge.class, 1)) {
             if (((PersonNode)node).getVille().equals("Neuchâtel")) {
                 if (graphe.widthWay(node, IsWatchingEdge.class,1).contains(amazon)) {
