@@ -6,6 +6,4 @@ public class ListeningNode extends Node {
         super(name);
     }
 
-
-
 }

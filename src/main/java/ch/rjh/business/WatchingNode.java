@@ -6,6 +6,4 @@ public class WatchingNode extends Node {
         super(name);
     }
 
-
-
 }

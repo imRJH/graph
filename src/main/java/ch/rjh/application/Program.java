@@ -4,12 +4,12 @@ import ch.rjh.business.*;
 
 public class Program {
     public static void main(String[] args) {
-        //exerciceParcoursLimite();
-        //friendshipGraph();
-        //firstGraph();
+        //new Program().multipleNodeTypeWay();
+        //new Program().friendshipGraph();
+        //new Program().firstGraph();
     }
 
-    private static void exerciceParcoursLimite() {
+    private void multipleNodeTypeWay() {
 
         Graph graphe = new Graph("Exercice");
 
@@ -47,24 +47,33 @@ public class Program {
         jean.addFriend("a11", alfred);
         alfred.addWatching("a12", netflix);
 
-        // Question 1 :
+        /*
+        Question 1 :
+        Lister tous les sites de streaming regardés par Paul.
+         */
         System.out.println();
         for (Node node : graphe.widthWay(paul, IsWatchingEdge.class, 1)) {
             System.out.print(node.getName() + "; ");
         }
 
-        // Question 2 :
+        /*
+        Question 2 :
+        Donner tous les amis de Paul jusqu’au 2e niveau qui regardent un site de streaming.
+         */
         System.out.println();
         for (Node node : graphe.widthWay(paul, IsFriendWithEdge.class, 2)) {
             if(node.getExitingEdge().values().stream().anyMatch(edge -> edge instanceof IsWatchingEdge))
                 System.out.print(node.getName() + "; ");
         }
 
-        // Question 3 :
+        /*
+        Question 3 :
+        Lister tous les amis (1er niveau) de Paul qui habitent à NE et qui regardent Amazon Prime Video.
+         */
         System.out.println();
         for (Node node : graphe.widthWay(paul, IsFriendWithEdge.class, 1)) {
             if (((PersonNode)node).getVille().equals("Neuchâtel")) {
-                if (graphe.widthWay(paul, IsWatchingEdge.class,1).contains(graphe.findNode("Amazon Prime Video"))) {
+                if (graphe.widthWay(paul, IsWatchingEdge.class,1).contains(amazon)) {
                     System.out.print(node.getName() + "; ");
                 }
             }
@@ -72,7 +81,7 @@ public class Program {
 
     }
 
-    private static void friendshipGraph() {
+    private void friendshipGraph() {
 
         // Création du graphe :
         Graph graphe = new Graph("Amitiés");
@@ -112,7 +121,7 @@ public class Program {
         carlos.addWatching("a8", netflix);
 
         // Afficher le graphe :
-        System.out.println(graphe.toString());
+        System.out.println(graphe);
 
         // Parcours du graphe en largeur avec un niveau :
         graphe.widthWay(jean, IsFriendWithEdge.class,2);
@@ -121,7 +130,7 @@ public class Program {
 
     }
 
-    private static void firstGraph() {
+    private void firstGraph() {
 
         // Création du graphe :
         Graph g = new Graph("G1");

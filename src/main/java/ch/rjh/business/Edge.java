@@ -2,13 +2,11 @@ package ch.rjh.business;
 
 public class Edge {
 
-    // Attributes :
     private String name;
     private Node source;
     private Node destination;
     private double metric;
 
-    // Constructors :
     public Edge(String name, Node destination) {
         this.name = name;
         this.destination = destination;
@@ -33,7 +31,6 @@ public class Edge {
         this.destination = destination;
     }
 
-    // Getter & Setter :
     public String getName() {
         return name;
     }
@@ -66,9 +63,10 @@ public class Edge {
         this.destination = destination;
     }
 
-    // Methods :
-
-    // toString :
+    /**
+     * Nouvelle méthode toString()
+     * @return Un objet String à afficher
+     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

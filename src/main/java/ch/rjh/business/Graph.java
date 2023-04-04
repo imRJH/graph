@@ -4,17 +4,14 @@ import java.util.*;
 
 public class Graph {
 
-    // Attributes :
     private String name;
     private Map<String, Node> nodeMap;
 
-    // Constructors :
     public Graph(String name) {
         this.name = name;
         this.nodeMap = new HashMap<>();
     }
 
-    // Getter & Setter :
     public String getName() {
         return name;
     }
@@ -31,7 +28,11 @@ public class Graph {
         this.nodeMap = nodeMap;
     }
 
-    // Methods :
+    /**
+     * Retourner un noeud en fonction de son nom
+     * @param nodeName Nom du noeud à trouver
+     * @return un objet noeud dont le nom a été entré en paramètre
+     */
     public Node findNode(String nodeName) {
         try {
             return nodeMap.get(nodeName);
@@ -40,10 +41,18 @@ public class Graph {
         }
     }
 
+    /**
+     * Ajouter un noeud au graphe
+     * @param node Noeud à ajouter
+     */
     public void addNode(Node node) {
         nodeMap.put(node.getName(), node);
     }
 
+    /**
+     * Supprimer un noeud du graphe
+     * @param node
+     */
     public void removeNode(Node node) {
         for (Node nodeNavigation : this.nodeMap.values()) {
             Iterator<Edge> iteEdge = nodeNavigation.getExitingEdge().values().iterator();
@@ -57,6 +66,10 @@ public class Graph {
         nodeMap.remove(node);
     }
 
+    /**
+     * Supprimer un noeud du graphe en gérant également les sources
+     * @param node Noeud à supprimer
+     */
     public void removeNodeWithSource(Node node) {
         for (Node nodeNavigation : this.nodeMap.values()) {
             Iterator<Edge> exitingEdge = nodeNavigation.getExitingEdge().values().iterator();
@@ -77,6 +90,10 @@ public class Graph {
         nodeMap.remove(node.getName());
     }
 
+    /**
+     * Parcours en largeur à partir d'un noeud
+     * @param node Noeud de départ
+     */
     public void widthWay(Node node) {
         reinitAll();
         LinkedList<Node> queue = new LinkedList<>(); // Création de la queue > FIFO
@@ -98,6 +115,11 @@ public class Graph {
         System.out.println(nodesNameLargeur);
     }
 
+    /**
+     * Parcours en largeur à partir d'un noeud
+     * @param node Noeud de départ
+     * @param maxLevel Niveau de détail
+     */
     public void widthWay(Node node, int maxLevel) {
         reinitAll();
         LinkedList<Node> queue = new LinkedList<>(); // Création de la queue > FIFO
@@ -122,6 +144,13 @@ public class Graph {
         System.out.println(nodesNameLargeur);
     }
 
+    /**
+     * Parcours en largeur à partir d'un noeud
+     * @param node Noeud de départ
+     * @param typeClass Afficher un type de classe spécifique
+     * @param maxLevel Niveau de détail
+     * @return Liste de noeuds
+     */
     public List<Node> widthWay(Node node, Class typeClass, int maxLevel) {
         reinitAll();
         LinkedList<Node> queue = new LinkedList<>(); // Création de la queue > FIFO
@@ -147,6 +176,10 @@ public class Graph {
         return nodesNameLargeur;
     }
 
+    /**
+     * Parcours en profondeur à partir d'un noeud
+     * @param node Noeud de départ
+     */
     public void depthWay(Node node) {
         reinitAll();
         LinkedList<Node> stack = new LinkedList<>();
@@ -168,12 +201,19 @@ public class Graph {
         System.out.println(nodesNameLongueur);
     }
 
+    /**
+     * Réinitialise tous les noeuds du graphe
+     */
     private void reinitAll() {
         for (Node node : nodeMap.values()) {
             node.reinit();
         }
     }
 
+    /**
+     * Nouvelle méthode toString()
+     * @return Un objet String à afficher
+     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
