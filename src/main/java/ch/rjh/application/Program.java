@@ -4,9 +4,14 @@ import ch.rjh.business.*;
 
 public class Program {
     public static void main(String[] args) {
+        new Program().firstDijkstra();
         //new Program().multipleNodeTypeWay();
         //new Program().friendshipGraph();
         //new Program().firstGraph();
+    }
+
+    private void firstDijkstra() {
+        System.out.println("Hello");
     }
 
     private void multipleNodeTypeWay() {
@@ -34,18 +39,18 @@ public class Program {
         graphe.addNode(amazon);
         graphe.addNode(netflix);
 
-        albert.addWatching("a1", amazon);
-        albert.addWatching("a2", disney);
-        julie.addFriend("a3", albert);
-        paul.addFriend("a4", julie);
-        paul.addWatching("a5", amazon);
-        paul.addFriend("a6", jean);
-        paul.addFriend("a7", lucie);
-        paul.addWatching("a8", netflix);
-        lucie.addWatching("a9", amazon);
-        lucie.addWatching("a10", netflix);
-        jean.addFriend("a11", alfred);
-        alfred.addWatching("a12", netflix);
+        albert.addWatching("a1", amazon, 1);
+        albert.addWatching("a2", disney, 1);
+        julie.addFriend("a3", albert, 1);
+        paul.addFriend("a4", julie, 1);
+        paul.addWatching("a5", amazon, 1);
+        paul.addFriend("a6", jean, 1);
+        paul.addFriend("a7", lucie, 1);
+        paul.addWatching("a8", netflix, 1);
+        lucie.addWatching("a9", amazon, 1);
+        lucie.addWatching("a10", netflix, 1);
+        jean.addFriend("a11", alfred, 1);
+        alfred.addWatching("a12", netflix, 1);
 
         /*
         Question 1 :
@@ -109,16 +114,16 @@ public class Program {
         graphe.addNode(netflix);
 
         // Ajout d'amitiés :
-        jean.addFriend("a1", paul);
-        jean.addFriend("a2", carlos);
-        carlos.addFriend("a3", jean);
-        carlos.addFriend("a4", julie);
+        jean.addFriend("a1", paul, 1);
+        jean.addFriend("a2", carlos, 1);
+        carlos.addFriend("a3", jean, 1);
+        carlos.addFriend("a4", julie, 1);
 
         // Ajout d'écoutes ou visualisations :
-        julie.addListening("a5", spotify);
-        jean.addListening("a6", applePodcast);
-        jean.addWatching("a7", youtube);
-        carlos.addWatching("a8", netflix);
+        julie.addListening("a5", spotify, 1);
+        jean.addListening("a6", applePodcast, 1);
+        jean.addWatching("a7", youtube, 1);
+        carlos.addWatching("a8", netflix, 1);
 
         // Parcours du graphe en largeur avec un niveau :
         System.out.println();
@@ -156,13 +161,13 @@ public class Program {
         g.addNode(e);
 
         // Ajout d'edges :
-        a.addEdge("u1", c);
-        a.addEdge("u2", b);
-        a.addEdge("u3", d);
-        b.addEdge("u4", d);
-        c.addEdge("u5", d);
-        d.addEdge("u6", e);
-        c.addEdge("u7", e);
+        a.addEdge("u1", c, 1);
+        a.addEdge("u2", b, 1);
+        a.addEdge("u3", d, 1);
+        b.addEdge("u4", d, 1);
+        c.addEdge("u5", d, 1);
+        d.addEdge("u6", e, 1);
+        c.addEdge("u7", e, 1);
         System.out.println(g);
 
         // Pacours en largeur avec un niveau :

@@ -7,20 +7,9 @@ public class Edge {
     private Node destination;
     private double metric;
 
-    public Edge(String name, Node destination) {
-        this.name = name;
-        this.destination = destination;
-    }
-
     public Edge(String name, Node destination, double metric) {
         this.name = name;
         this.metric = metric;
-        this.destination = destination;
-    }
-
-    public Edge(String name, Node source, Node destination) {
-        this.name = name;
-        this.source = source;
         this.destination = destination;
     }
 

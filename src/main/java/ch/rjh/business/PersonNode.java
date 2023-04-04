@@ -21,9 +21,10 @@ public class PersonNode extends Node {
      * Ajouter un ami (arc) à une personne (noeud)
      * @param edgeName Nom de l'arc
      * @param friend Ami (noeud) de destination
+     * @param metric Poids de l'arc
      */
-    public void addFriend(String edgeName, PersonNode friend) {
-        Edge edge = new IsFriendWithEdge(edgeName, this, friend);
+    public void addFriend(String edgeName, PersonNode friend, double metric) {
+        Edge edge = new IsFriendWithEdge(edgeName, this, friend, metric);
         friend.getEnteringEdge().put(edgeName, edge);
         this.getExitingEdge().put(edgeName, edge);
     }
@@ -32,9 +33,10 @@ public class PersonNode extends Node {
      * Ajouter une service d'écoute (arc) à une personne (noeud)
      * @param edgeName Nom de l'arc
      * @param listen Service d'écoute (noeud) de destination
+     * @param metric Poids de l'arc
      */
-    public void addListening(String edgeName, ListeningNode listen) {
-        Edge edge = new IsListeningEdge(edgeName, listen);
+    public void addListening(String edgeName, ListeningNode listen, double metric) {
+        Edge edge = new IsListeningEdge(edgeName, listen, metric);
         listen.getEnteringEdge().put(edgeName, edge);
         this.getExitingEdge().put(edgeName, edge);
     }
@@ -43,9 +45,10 @@ public class PersonNode extends Node {
      * Ajouter un service de streaming (arc) à une personne (noeud)
      * @param edgeName Nom de l'arc
      * @param watch Service de streaming (noeud) de destination
+     * @param metric Poids de l'arc
      */
-    public void addWatching(String edgeName, WatchingNode watch) {
-        Edge edge = new IsWatchingEdge(edgeName, watch);
+    public void addWatching(String edgeName, WatchingNode watch, double metric) {
+        Edge edge = new IsWatchingEdge(edgeName, watch, metric);
         watch.getEnteringEdge().put(edgeName, edge);
         this.getExitingEdge().put(edgeName, edge);
     }

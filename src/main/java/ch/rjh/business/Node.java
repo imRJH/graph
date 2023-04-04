@@ -110,16 +110,6 @@ public class Node {
      * Ajouter un arc à un noeud
      * @param edgeName Nom de l'arc
      * @param nodeDestination Noeud de destination
-     */
-    public void addEdge(String edgeName, Node nodeDestination) {
-        Edge edge = new Edge(edgeName, nodeDestination);
-        this.getExitingEdge().put(edge.getName(), edge);
-    }
-
-    /**
-     * Ajouter un arc à un noeud
-     * @param edgeName Nom de l'arc
-     * @param nodeDestination Noeud de destination
      * @param metric Valeur de l'arc
      */
     public void addEdge(String edgeName, Node nodeDestination, double metric) {
@@ -131,7 +121,7 @@ public class Node {
      * Ajouter un arc à un noeud en gérant également l'arc entrant pour le noeud de destination
      * @param edgeName Nom de l'arc
      * @param nodeDestination Noeud de destination
-     * @param metric Valeur de l'arc
+     * @param metric Poids de l'arc
      */
     public void addEdgeWithSource(String edgeName, Node nodeDestination, double metric) {
         Edge edge = new Edge(edgeName, this, nodeDestination, metric);
