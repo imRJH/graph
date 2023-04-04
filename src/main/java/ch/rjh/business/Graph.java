@@ -31,19 +31,6 @@ public class Graph {
     }
 
     /**
-     * Retourner un noeud en fonction de son nom
-     * @param nodeName Nom du noeud à trouver
-     * @return un objet noeud dont le nom a été entré en paramètre
-     */
-    public Node findNode(String nodeName) {
-        try {
-            return nodeMap.get(nodeName);
-        } catch (IllegalArgumentException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    /**
      * Ajouter un noeud au graphe
      * @param node Noeud à ajouter
      */
