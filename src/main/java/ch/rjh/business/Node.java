@@ -81,6 +81,10 @@ public class Node {
         this.vpcc = vpcc;
     }
 
+    public void reinitVpcc() {
+        this.vpcc.clear();
+    }
+
     /**
      * Réaliser un marquage sur un noeud (lors d'un parcous)
      */

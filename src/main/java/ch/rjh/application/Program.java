@@ -48,7 +48,7 @@ public class Program {
         h.addEdge("u12", g, 9);
         d.addEdge("u14", a, 1);
 
-        System.out.println(Utils.shortestPath(graphe, b, e));
+        System.out.println(Utils.shortestPath(graphe, h, e));
 
     }
 

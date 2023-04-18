@@ -146,7 +146,7 @@ public class Utils {
             Collections.sort(priorityList, new DijkstraNodeComparator());
             currentNode = (Node)priorityList.remove(0);
             Node copyNode = currentNode;
-            startNode.getVpcc().put(copyNode.getName(), copyNode);
+            startNode.getVpcc().put(copyNode.getName(), copyNode); // Copie pour garder les bonnes valeurs dans le VPCC
 
             for (Iterator ita = currentNode.getExitingEdge().values().iterator(); ita.hasNext();) {
                 tempEdge = (Edge) ita.next();
@@ -209,6 +209,10 @@ public class Utils {
             sb.append(" ").append(node.getName());
         }
         sb.append("\n");
+
+        // Réinitialisation du VPCC du noeud source :
+        nodeSource.reinitVpcc();
+
         return sb.toString();
 
     }
