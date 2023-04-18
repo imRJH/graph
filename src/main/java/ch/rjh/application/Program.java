@@ -5,10 +5,101 @@ import ch.rjh.util.Utils;
 
 public class Program {
     public static void main(String[] args) {
-        new Program().firstDijkstra();
+        new Program().cantonNeuchatel();
+        //new Program().firstDijkstra();
         //new Program().multipleNodeTypeWay();
         //new Program().friendshipGraph();
         //new Program().firstGraph();
+    }
+
+    private void cantonNeuchatel() {
+
+        Graph graphe = new Graph("Canton de Neuchâtel");
+
+        Node neuchatel = new Node("Neuchâtel"),
+                laChauxDeFonds = new Node("Chaux-de-Fonds"),
+                leLocle = new Node("Le Locle"),
+                lesPontsDeMartel = new Node("Les Ponts De Martel"),
+                boudry = new Node("Boudry"),
+                cernier = new Node("Cernier"),
+                stImier = new Node("St. Imier"),
+                i1 = new Node("NeuchatelBoudryCouvetLesPontsDeMartel"),
+                i2 = new Node("NeuchatelCernierChauxDeFonds"),
+                i3 = new Node("NeuchatelCernierStImierRouge"),
+                i4 = new Node("NeuchatelCernierStImierOrange")
+                        ;
+
+        graphe.addNode(neuchatel);
+        graphe.addNode(laChauxDeFonds);
+        graphe.addNode(leLocle);
+        graphe.addNode(lesPontsDeMartel);
+        graphe.addNode(boudry);
+        graphe.addNode(cernier);
+        graphe.addNode(stImier);
+        graphe.addNode(i1);
+        graphe.addNode(i2);
+        graphe.addNode(i3);
+        graphe.addNode(i4);
+
+        // Chaux-de-Fonds <-> St-Imier :
+        laChauxDeFonds.addEdge("u1", stImier, 20);
+        stImier.addEdge("u2", laChauxDeFonds, 20);
+
+        // Chaux-de-Fonds <-> Le Locle :
+        laChauxDeFonds.addEdge("u3", leLocle, 10);
+        leLocle.addEdge("u4", laChauxDeFonds, 10);
+
+        // Chaux-de-Fonds <-> i2 :
+        laChauxDeFonds.addEdge("u5", i2, 10);
+        i2.addEdge("u6", laChauxDeFonds, 10);
+
+        // Le Locle <-> Les Ponts de Martel :
+        leLocle.addEdge("u7", lesPontsDeMartel, 15);
+        lesPontsDeMartel.addEdge("u8", leLocle, 15);
+
+        // Les Ponts de Martel <-> i1
+        lesPontsDeMartel.addEdge("u9", i1, 14);
+        i1.addEdge("u10", lesPontsDeMartel, 14);
+
+        // Boudry <-> i1 :
+        boudry.addEdge("u11", i1, 5);
+        i1.addEdge("u12", boudry, 5);
+
+        // Boudry <-> Neuchâtel :
+        boudry.addEdge("u13", neuchatel, 11);
+        neuchatel.addEdge("u14", boudry, 11);
+
+        // Neuchâtel <-> i1 :
+        neuchatel.addEdge("u15", i1, 12);
+        i1.addEdge("u16", neuchatel, 12);
+
+        // Neuchâtel <-> i3 :
+        neuchatel.addEdge("u17", i3, 2);
+        i3.addEdge("u18", neuchatel, 2);
+
+        // i3 <-> i4 :
+        i3.addEdge("u19", i4, 5);
+        i4.addEdge("u20", i3, 5);
+
+        // Cernier <-> i3 :
+        cernier.addEdge("u21", i3, 15);
+        i3.addEdge("u22", cernier, 15);
+
+        // Cernier <-> i2 :
+        cernier.addEdge("u23", i2, 1);
+        i2.addEdge("u24", cernier, 1);
+
+        // Cernier <-> i4 :
+        cernier.addEdge("u25", i4, 4);
+        i4.addEdge("u26", cernier, 4);
+
+        // i4 <-> St-Imer :
+        i4.addEdge("u27", stImier, 10);
+        stImier.addEdge("u28", i4, 10);
+
+        System.out.println(Utils.shortestPath(graphe, laChauxDeFonds, cernier));
+        System.out.println(Utils.shortestPath(graphe, cernier, laChauxDeFonds));
+
     }
 
     private void firstDijkstra() {
