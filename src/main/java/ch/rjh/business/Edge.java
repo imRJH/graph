@@ -1,6 +1,8 @@
 package ch.rjh.business;
 
-public class Edge {
+import java.io.Serializable;
+
+public class Edge implements Serializable {
 
     private String name;
     private Node source;

@@ -3,13 +3,52 @@ package ch.rjh.application;
 import ch.rjh.business.*;
 import ch.rjh.util.Utils;
 
+import java.io.IOException;
+import java.util.Iterator;
+import java.util.List;
+
 public class Program {
     public static void main(String[] args) {
-        new Program().cantonNeuchatel();
+        new Program().firstTriTopologique();
+        //new Program().cantonNeuchatel();
         //new Program().firstDijkstra();
         //new Program().multipleNodeTypeWay();
         //new Program().friendshipGraph();
         //new Program().firstGraph();
+    }
+
+    private void firstTriTopologique() {
+
+        Graph graphe = new Graph("First Tri Topologique");
+
+        Node a = new Node("A"),
+                b = new Node("B"),
+                c = new Node("C"),
+                d = new Node("D");
+
+        graphe.addNode(a);
+        graphe.addNode(b);
+        graphe.addNode(c);
+        graphe.addNode(d);
+
+        b.addEdge("u1", a, 5);
+        a.addEdge("u2", c, 5);
+        a.addEdge("u3", d, 3);
+        b.addEdge("u4", d, 10);
+        d.addEdge("u5", c, 1);
+
+        try {
+            Utils.triTopologiqueAvecAttrGraphe(graphe);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        graphe.getMiseEnRang().values().stream()
+                .flatMap(List::stream)
+                .forEach(node -> System.out.println(node.getName()));
+
     }
 
     private void cantonNeuchatel() {
@@ -81,9 +120,9 @@ public class Program {
         i3.addEdge("u19", i4, 5);
         i4.addEdge("u20", i3, 5);
 
-        // Cernier <-> i3 :
-        cernier.addEdge("u21", i3, 15);
-        i3.addEdge("u22", cernier, 15);
+        // i2 <-> i3 :
+        i2.addEdge("u21", i3, 15);
+        i3.addEdge("u22", i2, 15);
 
         // Cernier <-> i2 :
         cernier.addEdge("u23", i2, 1);

@@ -1,17 +1,20 @@
 package ch.rjh.business;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Node {
+public class Node implements Serializable {
 
     private String name;
     private int level;
     private boolean isMarked;
     private double dijkstraWeight;
     private Node dijkstraPred;
+    private int DegInt;
+    private int DegOut;
     private Map<String, Edge> enteringEdge;
     private Map<String, Edge> exitingEdge;
     private Map<String, Node> vpcc;
@@ -67,6 +70,22 @@ public class Node {
 
     public void setDijkstraPred(Node dijkstraPred) {
         this.dijkstraPred = dijkstraPred;
+    }
+
+    public int getDegInt() {
+        return DegInt;
+    }
+
+    public void setDegInt(int degInt) {
+        DegInt = degInt;
+    }
+
+    public int getDegOut() {
+        return DegOut;
+    }
+
+    public void setDegOut(int degOut) {
+        DegOut = degOut;
     }
 
     public Map<String, Edge> getExitingEdge() {

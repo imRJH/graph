@@ -5,6 +5,7 @@ import ch.rjh.business.Graph;
 import ch.rjh.business.Node;
 import ch.rjh.dijkstra.DijkstraNodeComparator;
 
+import java.io.*;
 import java.util.*;
 
 public class Utils {
@@ -214,6 +215,53 @@ public class Utils {
         nodeSource.reinitVpcc();
 
         return sb.toString();
+
+    }
+
+    private static Graph copy(Graph g) throws IOException, ClassNotFoundException {
+        ByteArrayOutputStream bout = new ByteArrayOutputStream();
+        ObjectOutputStream cout = new ObjectOutputStream(bout);
+        cout.writeObject(g);
+        byte[] bytes = bout.toByteArray();
+
+        ByteArrayInputStream bin = new ByteArrayInputStream(bytes);
+        ObjectInputStream cin = new ObjectInputStream(bin);
+        Graph clone = (Graph) cin.readObject();
+        clone.setName(g.getName() + "_Copy");
+        return clone;
+    }
+
+    public static void triTopologiqueAvecAttrGraphe(Graph g) throws IOException, ClassNotFoundException {
+
+        Graph copy = copy(g);
+        g.getMiseEnRang().clear();
+        int rang = 0;
+        boolean cycle = false;
+
+        while (!copy.getNodeMap().isEmpty() && !cycle) {
+
+            copy.calculDegres();
+            List<Node> noeudsRangCourant = new ArrayList<Node>();
+
+            Iterator<Node> it = copy.getNodeMap().values().iterator();
+            while (it.hasNext()) {
+                Node node = (Node) it.next();
+                if (node.getDegInt() == 0) {
+                    // Ajouter au rang le nod du graphe (g) et non sa copie (copy)
+                    Node noeudCourant = g.findNode(node.getName());
+                    noeudsRangCourant.add(noeudCourant);
+                    it.remove();
+                }
+            }
+
+            if (noeudsRangCourant.isEmpty() && !copy.getNodeMap().isEmpty()) {
+                cycle = true;
+            }
+
+            g.getMiseEnRang().put(rang, noeudsRangCourant);
+            rang++;
+
+        }
 
     }
 

@@ -1,19 +1,46 @@
 package ch.rjh.business;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class Graph {
+public class Graph implements Serializable {
 
     private String name;
     private Map<String, Node> nodeMap;
+    private Map<Integer, List<Node>> miseEnRang;
 
     public Graph(String name) {
         this.name = name;
         this.nodeMap = new HashMap<>();
+        this.miseEnRang = new HashMap<>();
     }
 
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Map<String, Node> getNodeMap() {
+        return nodeMap;
+    }
+
+    public void setNodeMap(Map<String, Node> nodeMap) {
+        this.nodeMap = nodeMap;
+    }
+
+    public Map<Integer, List<Node>> getMiseEnRang() {
+        return miseEnRang;
+    }
+
+    public void setMiseEnRang(Map<Integer, List<Node>> miseEnRang) {
+        this.miseEnRang = miseEnRang;
+    }
+
+    public Node findNode(String nodeName) {
+        return nodeMap.get(nodeName);
     }
 
     /**
@@ -80,6 +107,24 @@ public class Graph {
     public void reinitAllBeforeDijkstra() {
         for (Node node : nodeMap.values()) {
             node.reinitBeforeDijkstra();
+        }
+    }
+
+    private void reinitAllDegres() {
+        for (Node node : nodeMap.values()) {
+            node.setDegInt(0);
+            node.setDegOut(0);
+        }
+    }
+
+    public void calculDegres() {
+        reinitAllDegres();
+        for (Node node : nodeMap.values()) {
+            node.setDegOut(node.getExitingEdge().size());
+            for (Edge edge : node.getExitingEdge().values()) {
+                Node nodeDest = edge.getDestination();
+                nodeDest.setDegInt(nodeDest.getDegInt()+1);
+            }
         }
     }
 
