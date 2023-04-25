@@ -265,4 +265,14 @@ public class Utils {
 
     }
 
+    public static void affichageApresTri(Graph graphe) {
+        graphe.getMiseEnRang().entrySet().stream().forEach(entry -> {
+            int key = entry.getKey();
+            List<Node> nodes = entry.getValue();
+            System.out.print(key + " : ");
+            nodes.forEach(node -> System.out.print(node.getName() + " "));
+            System.out.println();
+        });
+    }
+
 }

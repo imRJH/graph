@@ -6,15 +6,65 @@ import ch.rjh.util.Utils;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class Program {
     public static void main(String[] args) {
-        new Program().firstTriTopologique();
+        new Program().secondTriTopologique();
+        //new Program().firstTriTopologique();
         //new Program().cantonNeuchatel();
         //new Program().firstDijkstra();
         //new Program().multipleNodeTypeWay();
         //new Program().friendshipGraph();
         //new Program().firstGraph();
+    }
+
+    private void secondTriTopologique() {
+
+        Graph graph = new Graph("graph");
+
+        Node a = new Node("A");
+        Node b = new Node("B");
+        Node c = new Node("C");
+        Node d = new Node("D");
+        Node e = new Node("E");
+        Node f = new Node("F");
+        Node g = new Node("G");
+        Node h = new Node("H");
+
+        graph.addNode(a);
+        graph.addNode(b);
+        graph.addNode(c);
+        graph.addNode(d);
+        graph.addNode(e);
+        graph.addNode(f);
+        graph.addNode(g);
+        graph.addNode(h);
+
+        a.addEdge("u1", b, 4);
+        b.addEdge("u2", c, 5);
+        c.addEdge("u3", e, 10);
+        b.addEdge("u4", d, 8);
+        d.addEdge("u5", c, 5);
+        c.addEdge("u6", f, 3);
+        f.addEdge("u7", e, 2);
+        d.addEdge("u8", f, 3);
+        g.addEdge("u9", f, 4);
+        g.addEdge("u10", d, 2);
+        a.addEdge("u11", g, 1);
+        h.addEdge("u12", a, 2);
+        h.addEdge("u13", g, 9);
+
+        try {
+            Utils.triTopologiqueAvecAttrGraphe(graph);
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        } catch (ClassNotFoundException ex) {
+            throw new RuntimeException(ex);
+        }
+
+        Utils.affichageApresTri(graph);
+
     }
 
     private void firstTriTopologique() {
@@ -45,9 +95,7 @@ public class Program {
             throw new RuntimeException(e);
         }
 
-        graphe.getMiseEnRang().values().stream()
-                .flatMap(List::stream)
-                .forEach(node -> System.out.println(node.getName()));
+        Utils.affichageApresTri(graphe);
 
     }
 
