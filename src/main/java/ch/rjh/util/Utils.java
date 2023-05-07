@@ -265,6 +265,14 @@ public class Utils {
 
     }
 
+    public static void ordoAuPlusTot(Graph graph) {
+        // Reinit
+        // Application triTopologiqueAvecAttrGraphe(graph) -> Tri Topologique pour miseEnRang
+        // Boucle sur la miseEnRang
+        // À chaque élément de chaque rang
+        // Parcourir tous les arcs sortants
+    }
+
     public static void affichageApresTri(Graph graphe) {
         graphe.getMiseEnRang().entrySet().stream().forEach(entry -> {
             int key = entry.getKey();
