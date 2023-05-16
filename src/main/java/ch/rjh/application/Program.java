@@ -1,6 +1,7 @@
 package ch.rjh.application;
 
 import ch.rjh.business.*;
+import ch.rjh.matrice.BiHashMap;
 import ch.rjh.util.Utils;
 
 import java.io.IOException;
@@ -10,13 +11,39 @@ import java.util.stream.Stream;
 
 public class Program {
     public static void main(String[] args) {
-        new Program().secondTriTopologique();
+        new Program().matrice();
+        //new Program().secondTriTopologique();
         //new Program().firstTriTopologique();
         //new Program().cantonNeuchatel();
         //new Program().firstDijkstra();
         //new Program().multipleNodeTypeWay();
         //new Program().friendshipGraph();
         //new Program().firstGraph();
+    }
+
+    private void matrice() {
+        BiHashMap matrice = new BiHashMap<>();
+        matrice.addNode(1);
+        matrice.addNode(2);
+        matrice.addNode(3);
+        matrice.addEdge(1,1,1);
+        matrice.addEdge(1,2,2);
+        matrice.addEdge(1,3,3);
+        matrice.addEdge(2,1,2);
+        matrice.addEdge(2,2,2);
+        matrice.addEdge(2,3,6);
+        matrice.addEdge(3,1,3);
+        matrice.addEdge(3,2,6);
+        matrice.addEdge(3,3,null);
+        matrice.addEdge(3,4,null);
+        matrice.addNode(4);
+        matrice.addEdge(4,4,10);
+        matrice.addEdge(4,1,5);
+        matrice.addEdge(4,2,5);
+        matrice.addEdge(4,3,5);
+        System.out.println(matrice);
+        matrice.deleteNode(4);
+        System.out.println(matrice);
     }
 
     private void secondTriTopologique() {
