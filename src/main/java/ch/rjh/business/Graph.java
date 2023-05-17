@@ -128,6 +128,29 @@ public class Graph implements Serializable {
         }
     }
 
+    public void reinitOrdo() {
+        for (Node node : nodeMap.values()) {
+            node.setOrdoAuPlusTot(0);
+            node.setOrdoAuPlusTard(Double.MAX_VALUE);
+        }
+    }
+
+    public void afficherOrdonnancementAuPlusTard() {
+        System.out.println("Affichage ordonnancement au plus tard");
+        for (Node node : nodeMap.values()) {
+            System.out.println(node.getName() + " : " + node.getOrdoAuPlusTard());
+        }
+        System.out.println();
+    }
+
+    public void afficherOrdonnancementAuPlusTot() {
+        System.out.println("Affichage ordonnancement au plus tôt");
+        for (Node node : nodeMap.values()) {
+            System.out.println(node.getName() + " : " + node.getOrdoAuPlusTot());
+        }
+        System.out.println();
+    }
+
     /**
      * Nouvelle méthode toString()
      * @return Un objet String à afficher

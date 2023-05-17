@@ -18,6 +18,8 @@ public class Node implements Serializable {
     private Map<String, Edge> enteringEdge;
     private Map<String, Edge> exitingEdge;
     private Map<String, Node> vpcc;
+    private double ordoAuPlusTot;
+    private double ordoAuPlusTard;
 
     public Node(String name) {
         this.name = name;
@@ -102,6 +104,22 @@ public class Node implements Serializable {
 
     public void reinitVpcc() {
         this.vpcc.clear();
+    }
+
+    public double getOrdoAuPlusTot() {
+        return ordoAuPlusTot;
+    }
+
+    public void setOrdoAuPlusTot(double ordoAuPlusTot) {
+        this.ordoAuPlusTot = ordoAuPlusTot;
+    }
+
+    public double getOrdoAuPlusTard() {
+        return ordoAuPlusTard;
+    }
+
+    public void setOrdoAuPlusTard(double ordoAuPlusTard) {
+        this.ordoAuPlusTard = ordoAuPlusTard;
     }
 
     /**

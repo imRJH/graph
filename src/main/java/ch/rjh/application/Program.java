@@ -11,7 +11,8 @@ import java.util.stream.Stream;
 
 public class Program {
     public static void main(String[] args) {
-        new Program().matrice();
+        //new Program().matrice();
+        new Program().ordonnancement();
         //new Program().secondTriTopologique();
         //new Program().firstTriTopologique();
         //new Program().cantonNeuchatel();
@@ -44,6 +45,44 @@ public class Program {
         System.out.println(matrice);
         matrice.deleteNode(4);
         System.out.println(matrice);
+    }
+
+    private void ordonnancement() {
+
+        Graph graph = new Graph("Ordonnancement");
+
+        Node a = new Node("0");
+        Node b = new Node("1");
+        Node c = new Node("2");
+        Node d = new Node("3");
+        Node e = new Node("4");
+        Node f = new Node("5");
+        Node g = new Node("6");
+        Node h = new Node("7");
+
+        graph.addNode(a);
+        graph.addNode(b);
+        graph.addNode(c);
+        graph.addNode(d);
+        graph.addNode(e);
+        graph.addNode(f);
+        graph.addNode(g);
+        graph.addNode(h);
+
+        a.addEdgeWithSource("A2", b,2);
+        b.addEdgeWithSource("B5", c, 5);
+        c.addEdgeWithSource("D3", d, 3);
+        c.addEdgeWithSource("E2", e, 2);
+        c.addEdgeWithSource("C1", f, 1);
+        d.addEdgeWithSource("01", g, 0);
+        e.addEdgeWithSource("02", g, 0);
+        f.addEdgeWithSource("03", g, 0);
+        g.addEdgeWithSource("F2", h, 2);
+
+        Utils.ordoAuPlusTotAuPlusTard(graph);
+        graph.afficherOrdonnancementAuPlusTot();
+        graph.afficherOrdonnancementAuPlusTard();
+
     }
 
     private void secondTriTopologique() {

@@ -271,6 +271,64 @@ public class Utils {
         // Boucle sur la miseEnRang
         // À chaque élément de chaque rang
         // Parcourir tous les arcs sortants
+        graph.reinitOrdo();
+        try {
+            if (graph.getMiseEnRang().isEmpty()) // Vérifie que la liste miseEnRang est vide
+                triTopologiqueAvecAttrGraphe(graph); // Si liste vide, effectue la mise en rang
+            List<Node> list;
+            for (int rang = 0; rang < graph.getMiseEnRang().size(); rang++) {
+                list = graph.getMiseEnRang().get(rang);
+                for (int i = 0; i < list.size(); i++) {
+                    Node node = graph.findNode(list.get(i).getName());
+                    for (Iterator it = (Iterator) node.getExitingEdge().values().iterator(); it.hasNext();) {
+                        Edge edge = (Edge) it.next();
+                        Node dest = edge.getDestination();
+                        double new_ordo = edge.getMetric() + node.getOrdoAuPlusTot();
+                        if (new_ordo > dest.getOrdoAuPlusTot())
+                            dest.setOrdoAuPlusTot(new_ordo);
+                    }
+                }
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void ordoAuPlusTotAuPlusTard(Graph graph) {
+        try {
+            graph.reinitOrdo();
+            if (graph.getMiseEnRang().isEmpty()) {
+                triTopologiqueAvecAttrGraphe(graph);
+                ordoAuPlusTot(graph);
+            }
+            List<Node> list;
+            for (int rang = graph.getMiseEnRang().size() - 1; rang >= 0; rang--) {
+                list = graph.getMiseEnRang().get(rang);
+                if (rang == graph.getMiseEnRang().size() -1) {
+                    for (int i = 0; i < list.size(); i++) {
+                        Node node = graph.findNode(list.get(i).getName());
+                        node.setOrdoAuPlusTard(node.getOrdoAuPlusTot());
+                    }
+                }
+                for (int i = 0; i < list.size(); i++) {
+                    Node node = graph.findNode(list.get(i).getName());
+                    for (Iterator it = node.getEnteringEdge().values().iterator(); it.hasNext();) {
+                        Edge edge = (Edge) it.next();
+                        Node src = edge.getSource();
+                        double newOrdo = node.getOrdoAuPlusTard() - edge.getMetric();
+                        if (newOrdo < src.getOrdoAuPlusTard()) {
+                            src.setOrdoAuPlusTard(newOrdo);
+                        }
+                    }
+                }
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public static void affichageApresTri(Graph graphe) {
